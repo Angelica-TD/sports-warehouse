@@ -1,0 +1,383 @@
+/* CSS normalisation = override styles that are causing problems */
+/*! modern-normalize v3.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
+*,::after,::before{box-sizing:border-box}html{font-family:system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji';line-height:1.15;-webkit-text-size-adjust:100%;tab-size:4}body{margin:0}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',Menlo,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{border-color:currentcolor}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}legend{padding:0}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}
+
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Font Awesome";
+  src: url("https://mdn.github.io/css-examples/web-fonts/VeraSeBd.ttf");
+}
+
+/*
+ * Screen reader only text
+ * Hidden for visual users, shown to screen readers
+ * https://webaim.org/techniques/css/invisiblecontent/
+ */
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+:root {
+  /* Define some custom properties (CSS variables) */
+  --light-blue: #00ACED;
+  --mid-blue: #006989;
+  --dark-blue: #002936;
+  --grey: #595959;
+  --orange: #FB6806;
+  --white: #FFFFFF;
+  --items-pill-bg: hsla(0, 0%, 0%, 0.15);
+  --link-colour: hsl(39, 100%, 50%);
+  --link-hover-colour: hsl(39, 100%, 40%);
+}
+
+
+body {
+  background-color: white;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul{
+  list-style: none;
+  padding: 0;
+}
+
+
+/* ICONS */
+.icon::before {
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  color: currentColor;
+  font: var(--fa-font-solid);
+}
+
+/* SECTIONS */
+
+.section-wrapper--bgblue{
+  background-color: var(--light-blue);
+  color: var(--white);
+}
+
+.section-constrained{
+  max-width: 960px;
+  margin: auto;
+}
+
+/* TOP NAV */
+.top-nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-nav ul,
+.account-actions a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-nav ul{
+  gap: 15px;
+}
+
+.top-nav a{
+  line-height: 2;
+}
+
+.account-actions a{
+  gap: 5px;
+}
+
+ul a{
+  color: var(--white);
+}
+
+.login::before{
+  content: '\f023';
+}
+
+.view-cart::before{
+  content: '\f07a';
+}
+
+.items-in-cart{
+  background-color: var(--items-pill-bg);
+  border-radius: 50px;
+  width: 80px;
+}
+
+/* TOP NAV HOVER EFFECTS */
+.top-nav a:not(.items-in-cart):hover{
+  color: var(--orange);
+}
+
+.items-in-cart:hover{
+  background-color: var(--orange);
+}
+
+
+/* SITE HEADER */
+
+.site-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* Example of a specific breakpoint for ONE part of the website (.site-header) rather than using a generic breakpoint for all elements. */
+@media screen and (min-width: 550px) {
+
+  .site-header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+}
+
+
+/* MAIN LOGO STYLING */
+
+.logo-container {}
+
+.logo-link {
+  display: block;
+  width: 600px;
+  height: 83px;
+  background: url(../images/logos/sports-warehouse.png) no-repeat center center;
+  transition: all 0.4s;
+}
+
+.logo-link:hover {
+  opacity: 0.7;
+  transform: scale(1.05);
+}
+
+.logo-link h1 {
+  margin: 0;
+
+  /* Visually hide text but show to screen readers */
+  /* text-indent: -10000px; */
+  /* text-indent: -100vw; */
+
+  /* Bad "hiding" options that are NOT good because they will hide content from screen readers */
+  /* display: none; */
+  /* visibility: hidden; */
+  /* opacity: 0; */
+  /* color: transparent; */
+  /* color: rgba(0, 0, 0, 0); */
+  /* color: #999; */
+  /* font-size: 0.01px; */
+  /* width: 0;
+  height: 0;
+  overflow: hidden; */
+  /* margin-left: -10000px; */
+}
+
+
+/* HEADER CONTACT DETAILS */
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.contact-details address {
+  font-style: normal;
+}
+
+.contact-details ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: right;
+}
+
+.contact-details li {
+  margin-bottom: 0.4em;
+}
+
+.contact-details li::after {
+  content: "(?)";
+  display: inline-block;
+  width: 1.5em;
+  margin-left: 0.5em;
+  text-align: center;
+}
+
+.contact-details li.phone::after {
+  /* content: "(p)"; */
+  /* content: "\1F4F1"; */
+  content: "📱";
+}
+
+.contact-details li.email::after {
+  /* content: "(e)"; */
+  content: "📧";
+}
+
+.contact-details li.website::after {
+  /* content: "(w)"; */
+  content: "🌐";
+}
+
+.contact-details a {
+  color: inherit;
+}
+
+.contact-details a:hover {
+  color: var(--link-colour);
+}
+
+
+.sidebar, .content {
+  padding: 20px;
+}
+
+:is(.sidebar, .content) > :first-child > :first-child {
+  margin-top: 0;
+}
+
+
+/* SIDEBAR */
+
+.sidebar {
+  background-color: var(--mid-grey);
+  color: var(--light-grey);
+}
+
+.main-nav > ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+
+  /* Option 1: Good apart from browser support */
+  list-style-type: "> ";
+  list-style-position: inside;
+
+  /* Option 2: Use a ::before pseudo element */
+}
+
+.main-nav > ul > li {
+  margin-bottom: 0.8em;
+}
+
+.main-nav > ul > li {
+  margin-bottom: 0.8em;
+}
+
+.main-nav a {
+  color: inherit;
+}
+
+.main-nav a:hover {
+  color: var(--link-colour);
+}
+
+
+/* CONTENT */
+
+.content {
+  background-color: var(--light-grey);
+  color: var(--dark-grey);
+}
+
+
+/* GALLERY */
+
+/* Option 1: Layout using Flex */
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.gallery-card {
+  flex-basis: 170px;
+}
+
+
+/* Option 2: Layout using Grid */
+
+
+
+/* Gallery general styling */
+
+.gallery {
+  margin-bottom: 2em;
+}
+
+.gallery-card {
+  padding: 10px;
+}
+
+.gallery-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1 / 1;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.gallery-image-container img {
+  /* Constrain the image to its container */
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+
+
+/* FOOTER */
+
+.site-footer {
+  background-color: var(--mid-grey);
+  color: var(--light-grey);
+}
+
+
+
+/* Add a breakpoint to target "larger" devices */
+@media only screen and (min-width: 800px) {
+  
+  .site-wrapper {
+    /* Grid with 2 cols and 3 rows */
+    grid-template-columns: 225px 1fr;
+    grid-template-rows: 
+      minmax(160px, auto)
+      minmax(500px, auto)
+      auto; /* minmax(7em, auto); */
+  }
+
+  .site-header {
+    grid-column: span 2;
+  }
+
+  .sidebar {}
+  .content {}
+
+  .site-footer {
+    grid-column: span 2;
+  }
+
+}
