@@ -20,15 +20,14 @@
   <header class="flex-column gap-smaller">
     <div class="section-wrapper--bgblue section-wrapper--padded">
       <div class="section-constrained">
-        <section class="top-nav">
+        <div class="top-nav">
           <nav aria-label="Main site navigation">
             <input type="checkbox" name="mobile-menu" id="mobile-menu">
-            <label for="mobile-menu" id="mobile-menu-icon">
-              <i class="fa-solid fa-bars icon-large"></i> Menu
+            <label for="mobile-menu">
+              <span id="mobile-menu-icon"><i class="fa-solid fa-bars icon-large"></i> Menu</span>
+              <i id="mobile-menu-icon-close" class="fa-solid fa-xmark icon-large" title="Close mobile menu" aria-hidden="true"></i>
             </label>
-            <label for="mobile-menu" id="mobile-menu-icon-close">
-              <i class="fa-solid fa-xmark icon-large" title="Close mobile menu" aria-hidden="true"></i>
-            </label>
+            
             <ul class="horizontal-list">
               <li><a class="login icon-large" href="#">Login</a></li>
               <li><a href="#">Home</a></li>
@@ -38,14 +37,14 @@
             </ul>
           </nav>
 
-          <section class="account-actions">
+          <div class="account-actions">
             <ul class="horizontal-list">
               <li><a class="login icon-large" href="#">Login</a></li>
               <li><a class="view-cart icon-large" href="#">View Cart</a></li>
               <li><a class="items-in-cart orange-fill-hover" href="#">0 items</a></li>
             </ul>
-          </section>
-        </section>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -63,7 +62,7 @@
       </form>
     </section>
 
-    <section class="section-constrained">
+    <div class="section-constrained">
       <nav class="strip strip--bgdarkblue" aria-label="Product category navigation">
         <ul class="horizontal-list horizontal-list--categories round-left pill">
           <li>
@@ -89,7 +88,7 @@
           </li>
         </ul>
       </nav>
-    </section>
+    </div>
   </header>
 
   <div class="section-wrapper flex-column gap-smaller">
@@ -203,14 +202,14 @@
               The best of the best is here.
             </p>
           </div>
-          <section class="strip strip--bgdarkblue partner-logos">
+          <div class="strip strip--bgdarkblue partner-logos">
             <img src="images/logos/nike.png" alt="nike">
             <img src="images/logos/adidas.png" alt="adidas">
             <img src="images/logos/skins.png" alt="skins">
             <img src="images/logos/asics.png" alt="asics">
             <img src="images/logos/newbalance.png" alt="new balance">
             <img src="images/logos/wilson.png" alt="wilson">
-          </section>
+          </div>
         </div>
       </section>
 
@@ -266,13 +265,11 @@
 
       </div>
     </div>
-    <section class="section-constrained">
-      <small>
-        <p>&copy; Copyright 2222 Sports Warehouse.</p>
+    <div class="section-constrained copyright">
+      <p>&copy; Copyright 2222 Sports Warehouse.</p>
         <p>All rights reserved.</p>
         <p>Website made by Awesomesauce Design and Angie.</p>
-      </small>
-    </section>
+    </div>
   </footer>
 
 </body>
