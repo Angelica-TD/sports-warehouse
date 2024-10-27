@@ -45,6 +45,10 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+body:has(#mobile-menu:checked){
+  overflow: hidden;
+}
+
 h2, h3, p{
   margin-block: 0;
 }
