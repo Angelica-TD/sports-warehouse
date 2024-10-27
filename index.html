@@ -1,40 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sports Warehouse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="./styles/style.css">
+  <link rel="icon" type="image/x-icon" href="images/logos/sw-favicon.png">
 
   <script src="https://kit.fontawesome.com/fbcec5cfed.js" crossorigin="anonymous"></script>
 </head>
-<body>
 
-  <header>
-    <div class="section-wrapper--bgblue">
+<body class="flex-column gap">
+
+  <header class="flex-column gap-smaller">
+    <div class="section-wrapper--bgblue section-wrapper--padded">
       <div class="section-constrained">
         <section class="top-nav">
           <nav aria-label="Main site navigation">
-            <ul class="menu">
+            <input type="checkbox" name="mobile-menu" id="mobile-menu">
+            <label for="mobile-menu" id="mobile-menu-icon">
+              <i class="fa-solid fa-bars icon-large"></i> Menu
+            </label>
+            <label for="mobile-menu" id="mobile-menu-icon-close">
+              <i class="fa-solid fa-xmark icon-large" title="Close mobile menu" aria-hidden="true"></i>
+            </label>
+            <ul class="horizontal-list">
+              <li><a class="login icon-large" href="#">Login</a></li>
               <li><a href="#">Home</a></li>
               <li><a href="#">About SW</a></li>
               <li><a href="#">Contact Us</a></li>
-              <li><a href="#">View Products</a></li> 
+              <li><a href="#">View Products</a></li>
             </ul>
           </nav>
-    
+
           <section class="account-actions">
-            <ul>
-              <li><a class="login icon" href="#">Login</a></li>
-              <li><a class="view-cart icon" href="#">View Cart</a></li>
-              <li><a class="items-in-cart" href="#">0 items</a></li>
+            <ul class="horizontal-list">
+              <li><a class="login icon-large" href="#">Login</a></li>
+              <li><a class="view-cart icon-large" href="#">View Cart</a></li>
+              <li><a class="items-in-cart orange-fill-hover" href="#">0 items</a></li>
             </ul>
           </section>
         </section>
       </div>
     </div>
-    
-    <section class="section-constrained site-header">
+
+    <section class="section-constrained site-header flex-column gap-smaller">
       <div class="logo-container">
         <a href="#" class="logo-link">
           <h1 class="sr-only">Sports Warehouse</h1>
@@ -42,15 +57,15 @@
       </div>
 
       <form action="">
-        <label for="search-product">Search products</label>
-        <input type="text" id="search-product" name="search-product">
-        <input type="image" src="searchbutton.png" alt="Search">
+        <label class="sr-only" for="search-product">Search products</label>
+        <input type="text" id="search-product" name="search-product" placeholder="Search products">
+        <input class="submit-search" type="image" src="images/icons/search-icon.png" alt="Search">
       </form>
     </section>
 
     <section class="section-constrained">
-      <nav aria-label="Product category navigation">
-        <ul>
+      <nav class="strip strip--bgdarkblue" aria-label="Product category navigation">
+        <ul class="horizontal-list horizontal-list--categories round-left pill">
           <li>
             <a href="#">Shoes</a>
           </li>
@@ -77,96 +92,109 @@
     </section>
   </header>
 
-  <div class="section-wrapper">
+  <div class="section-wrapper flex-column gap-smaller">
 
-
-    
-
-
-    <main>
-      <section class="banner">
-        <a href="#">
-          <img src="images/banner.png" alt="View our brand new range of sports balls">
-        </a>
-        
+    <main class="flex-column gap">
+      <section class="section-constrained banner">
+        <img class="banner__image" src="images/banner.png" alt="adidas soccer ball on grass">
+        <div class="banner__overlay">
+          <div class="banner__copy">
+            <h2 class="overlay__title">View our brand new range of <span>Sports balls</span></h2>
+            <a role="button" href="#" class="banner__button orange-fill-hover">Shop now</a>
+          </div>
+        </div>
       </section>
 
-      <section class="featured-products">
-        <h2>Featured products</h2>
+      <section class="section-constrained featured-products flex-column gap">
+        <h2 class="strip strip--mobile">Featured products</h2>
 
         <div class="products-container">
           <article class="product">
-            <img class="product__image" src="images/adidas-ball.png" alt="">
-            <div class="product__price on-sale">
-              <div>
-                $34.95
-              </div>
+            <a href="#">
+              <img class="product__image" src="images/adidas-ball.png" alt="adidas Euro16 Top Soccer Ball">
+            </a>
+            <div class="product__price product__price--sale">
+              $34.95
               <small>
                 was <del>$46.00</del>
               </small>
             </div>
-            <h3 class="product__name">
-              adidas Euro16 Top Soccer Ball
-            </h3>
+            <a href="#">
+              <h3 class="product__name">
+                adidas Euro16 Top Soccer Ball
+              </h3>
+            </a>
           </article>
           <article class="product">
-            <img class="product__image" src="images/helmet.png" alt="">
+            <a href="#">
+              <img class="product__image" src="images/helmet.png" alt="Pro-tec Classic Skate Helmet">
+            </a>
             <div class="product__price">
               <div>
                 $70.00
               </div>
             </div>
-            <h3 class="product__name">
-              Pro-tec Classic Skate Helmet
-            </h3>
+            <a href="#">
+              <h3 class="product__name">
+                Pro-tec Classic Skate Helmet
+              </h3>
+            </a>
           </article>
           <article class="product">
-            <img class="product__image" src="images/water-bottle.png" alt="">
-            <div class="product__price on-sale">
-              <div>
-                $15.00
-              </div>
+            <a href="#">
+              <img class="product__image" src="images/water-bottle.png" alt="Nike Sport 600ml Water Bottle">
+            </a>
+            <div class="product__price product__price--sale">
+              $15.00
               <small>
                 was <del>$17.50</del>
               </small>
             </div>
-            <h3 class="product__name">
+            <a href="#">
+              <h3 class="product__name">
                 Nike Sport 600ml Water Bottle
-            </h3>
+              </h3>
+            </a>
           </article>
           <article class="product">
-            <img class="product__image" src="images/boxing-gloves.png" alt="">
+            <a href="#">
+              <img class="product__image" src="images/boxing-gloves.png" alt="Sting ArmaPlus Boxing Gloves">
+            </a>
             <div class="product__price">
               <div>
                 $79.95
               </div>
             </div>
-            <h3 class="product__name">
-              Sting ArmaPlus Boxing Gloves
-            </h3>
+            <a href="#">
+              <h3 class="product__name">
+                Sting ArmaPlus Boxing Gloves
+              </h3>
+            </a>
           </article>
           <article class="product">
-            <img class="product__image" src="images/asics-boots.png" alt="">
-            <div class="product__price on-sale">
-              <div>
-                $15.00
-              </div>
+            <a href="#">
+              <img class="product__image" src="images/asics-boots.png" alt="Asics Gel Lethal Tigreor 8 IT Men's">
+            </a>
+            <div class="product__price product__price--sale">
+              $15.00
               <small>
                 was <del>$17.50</del>
               </small>
             </div>
-            <h3 class="product__name">
-              Asics Gel Lethal Tigreor 8 IT Men's
-            </h3>
+            <a href="#">
+              <h3 class="product__name">
+                Asics Gel Lethal Tigreor 8 IT Men's
+              </h3>
+            </a>
           </article>
         </div>
 
       </section>
 
-      <section class="partnerships-container">
-        <h2>Our brands and partnerships</h2>
+      <section class="section-constrained partnerships-container flex-column gap">
+        <h2 class="strip strip--mobile">Our brands and partnerships</h2>
 
-        <div class="partnerships-info">
+        <div class="partnerships-info flex-column gap">
           <div class="intro">
             <p>
               These are some of our top brands and partnerships.
@@ -175,13 +203,13 @@
               The best of the best is here.
             </p>
           </div>
-          <section class="partner-logos">
-            <img src="images/logos/nike.png" alt="">
-            <img src="images/logos/adidas.png" alt="">
-            <img src="images/logos/skins.png" alt="">
-            <img src="images/logos/asics.png" alt="">
-            <img src="images/logos/newbalance.png" alt="">
-            <img src="images/logos/wilson.png" alt="">
+          <section class="strip strip--bgdarkblue partner-logos">
+            <img src="images/logos/nike.png" alt="nike">
+            <img src="images/logos/adidas.png" alt="adidas">
+            <img src="images/logos/skins.png" alt="skins">
+            <img src="images/logos/asics.png" alt="asics">
+            <img src="images/logos/newbalance.png" alt="new balance">
+            <img src="images/logos/wilson.png" alt="wilson">
           </section>
         </div>
       </section>
@@ -189,72 +217,64 @@
     </main>
 
   </div>
-
-  <div class="section-wrapper">
-    <footer>
-      <section>
-        <h2>Site navigation</h2>
-        <nav aria-label="Footer navigation">
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About SW</a></li>
-            <li><a href="#">Contact us</a></li>
-            <li><a href="#">View products</a></li> 
-            <li><a href="#">Privacy policy</a></li> 
+  
+  <footer class="flex-column gap">
+    <div class="section-wrapper section-wrapper--bgblue">
+      <div class="section-constrained footer-nav">
+        <section class="site-nav" aria-labelledby="site-nav-heading">
+          <h2 id="site-nav-heading">Site navigation</h2>
+          <nav aria-label="Footer navigation">
+            <ul class="left-pill">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About SW</a></li>
+              <li><a href="#">Contact us</a></li>
+              <li><a href="#">View products</a></li>
+              <li><a href="#">Privacy policy</a></li>
+            </ul>
+          </nav>
+        </section>
+        <section class="product-categories" aria-labelledby="product-categories-heading">
+          <h2 id="product-categories-heading">Product categories</h2>
+          <ul class="left-pill">
+            <li><a href="#">Shoes</a></li>
+            <li><a href="#">Helmets</a></li>
+            <li><a href="#">Pants</a></li>
+            <li><a href="#">Tops</a></li>
+            <li><a href="#">Balls</a></li>
+            <li><a href="#">Equipment</a></li>
+            <li><a href="#">Training gear</a></li>
           </ul>
-        </nav>
-      </section>
-      <section>
-        <h2>Product categories</h2>
-        <ul>
-          <li>
-            <a href="#">Shoes</a>
-          </li>
-          <li>
-            <a href="#">Helmets</a>
-          </li>
-          <li>
-            <a href="#">Pants</a>
-          </li>
-          <li>
-            <a href="#">Tops</a>
-          </li>
-          <li>
-            <a href="#">Balls</a>
-          </li>
-          <li>
-            <a href="#">Equipment</a>
-          </li>
-          <li>
-            <a href="#">Training gear</a>
-          </li>
-        </ul>
-      </section>
-      <section>
-        <h2>Contact Sports Warehouse</h2>
-        <div class="socials">
-          <article>
-            <img src="images/socials/facebook.png" alt="">
-            <h3>Facebook</h3>
-          </article>
-          <article>
-            <img src="images/socials/twitter.png" alt="">
-            <h3>Twitter</h3>
-          </article>
-          <article>
-            <img src="images/socials/other.png" alt="">
-            <h3>Other</h3>
-          </article>
-        </div>
-      </section>
-      <section>
+        </section>
+
+        <section class="contact-info" aria-labelledby="contact-sw-heading">
+          <h2 id="contact-sw-heading">Contact Sports Warehouse</h2>
+          <div class="socials">
+            <a href="#">
+              <img src="images/socials/facebook.png" alt="Like us on Facebook">
+              <h3>Facebook</h3>
+            </a>
+            <a href="#">
+              <img src="images/socials/twitter.png" alt="Follow us on Twitter">
+              <h3>Twitter</h3>
+            </a>
+            <a href="#">
+              <img src="images/socials/other.png" alt="Follow us on other platform">
+              <h3>Other</h3>
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </div>
+    <section class="section-constrained">
+      <small>
         <p>&copy; Copyright 2222 Sports Warehouse.</p>
         <p>All rights reserved.</p>
         <p>Website made by Awesomesauce Design and Angie.</p>
-      </section>
-    </footer>
-  </div>
-
+      </small>
+    </section>
+  </footer>
 
 </body>
+
 </html>
