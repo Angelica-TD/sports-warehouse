@@ -7,12 +7,13 @@
   <title>Sports Warehouse</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-    rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" media="print">
   <link rel="stylesheet" href="./styles/style.css">
+
   <link rel="icon" type="image/x-icon" href="images/logos/sw-favicon.png">
 
   <script src="https://kit.fontawesome.com/fbcec5cfed.js" crossorigin="anonymous"></script>
+  <meta name="description" content="desc">
 </head>
 
 <body class="flex-column gap">
@@ -55,7 +56,7 @@
         </a>
       </div>
 
-      <form action="">
+      <form action="/sample.php">
         <label class="sr-only" for="search-product">Search products</label>
         <input type="text" id="search-product" name="search-product" placeholder="Search products">
         <input class="submit-search" type="image" src="images/icons/search-icon.png" alt="Search">
@@ -95,7 +96,7 @@
 
     <main class="flex-column gap">
       <section class="section-constrained banner">
-        <img class="banner__image" src="images/banner.png" alt="adidas soccer ball on grass">
+        <img class="banner__image" src="images/banner.png" alt="adidas soccer ball on grass" loading="lazy">
         <div class="banner__overlay">
           <div class="banner__copy">
             <h2 class="overlay__title">View our brand new range of <span>Sports balls</span></h2>
@@ -110,7 +111,7 @@
         <div class="products-container">
           <article class="product">
             <a href="#">
-              <img class="product__image" src="images/adidas-ball.png" alt="adidas Euro16 Top Soccer Ball">
+              <img class="product__image" src="images/adidas-ball.jpg" alt="adidas Euro16 Top Soccer Ball">
             </a>
             <div class="product__price product__price--sale">
               $34.95
@@ -126,7 +127,7 @@
           </article>
           <article class="product">
             <a href="#">
-              <img class="product__image" src="images/helmet.png" alt="Pro-tec Classic Skate Helmet">
+              <img class="product__image" src="images/helmet.jpg" alt="Pro-tec Classic Skate Helmet">
             </a>
             <div class="product__price">
               <div>
@@ -141,7 +142,7 @@
           </article>
           <article class="product">
             <a href="#">
-              <img class="product__image" src="images/water-bottle.png" alt="Nike Sport 600ml Water Bottle">
+              <img class="product__image" src="images/water-bottle.jpg" alt="Nike Sport 600ml Water Bottle">
             </a>
             <div class="product__price product__price--sale">
               $15.00
@@ -157,7 +158,7 @@
           </article>
           <article class="product">
             <a href="#">
-              <img class="product__image" src="images/boxing-gloves.png" alt="Sting ArmaPlus Boxing Gloves">
+              <img class="product__image" src="images/boxing-gloves.jpg" alt="Sting ArmaPlus Boxing Gloves">
             </a>
             <div class="product__price">
               <div>
@@ -172,7 +173,7 @@
           </article>
           <article class="product">
             <a href="#">
-              <img class="product__image" src="images/asics-boots.png" alt="Asics Gel Lethal Tigreor 8 IT Men's">
+              <img class="product__image" src="images/asics-boots.jpg" alt="Asics Gel Lethal Tigreor 8 IT Men's">
             </a>
             <div class="product__price product__price--sale">
               $15.00
