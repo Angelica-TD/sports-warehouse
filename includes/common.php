@@ -11,6 +11,8 @@
   define("SCRIPTS_DIR", ROOT_DIR . "assets/js/");
   define("STYLES_DIR", ROOT_DIR . "assets/css/");
   define("IMAGES_DIR", ROOT_DIR . "assets/images/");
+  define('COMPANY_NAME', 'Sports Warehouse');
+
 
   // Database connection (create DBAccess instance in the $db variable)
   require_once INCLUDES_DIR . "database.php";

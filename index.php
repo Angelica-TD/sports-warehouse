@@ -6,7 +6,6 @@
 
   // Config
   $title = "Home";
-  $companyName = "Sports Warehouse";
   $scripts = [
     "subscribe.js"
   ];
