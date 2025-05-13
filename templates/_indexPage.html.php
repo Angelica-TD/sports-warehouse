@@ -12,6 +12,7 @@
   <h2 class="strip strip--mobile">Featured products</h2>
 
   <?php
+  $products = $featuredProducts;
   include "_products.html.php";
   ?>
 
