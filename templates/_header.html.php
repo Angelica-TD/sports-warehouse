@@ -12,9 +12,9 @@
 
                     <ul class="horizontal-list">
                         <li><a class="login icon-large" href="#">Login</a></li>
-                        <li><a href="#">Home</a></li>
+                        <li><a href="index.php">Home</a></li>
                         <li><a href="#">About SW</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="contact-us.php">Contact Us</a></li>
                         <li><a href="#">View Products</a></li>
                     </ul>
                 </nav>
@@ -33,7 +33,7 @@
 
     <section class="section-constrained site-header flex-column gap-smaller">
         <div class="logo-container">
-            <a href="#" class="logo-link">
+            <a href="index.php" class="logo-link">
                 <h1 class="sr-only">Sports Warehouse</h1>
             </a>
         </div>
@@ -45,13 +45,7 @@
         </form>
     </section>
 
-    <div class="section-constrained">
-        <nav class="strip strip--bgdarkblue" aria-label="Product category navigation">
-            <ul class="horizontal-list horizontal-list--categories round-left pill">
-                <?php include "_categories.html.php"; ?>
-            </ul>
-        </nav>
-    </div>
+    
 </header>
 
 

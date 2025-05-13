@@ -7,7 +7,7 @@
                     <ul class="left-pill">
                         <li><a href="#">Home</a></li>
                         <li><a href="#">About SW</a></li>
-                        <li><a href="#">Contact us</a></li>
+                        <li><a href="contact-us.php">Contact us</a></li>
                         <li><a href="#">View products</a></li>
                         <li><a href="#">Privacy policy</a></li>
                     </ul>
