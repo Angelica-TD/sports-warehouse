@@ -1,7 +1,7 @@
 <?php if (empty($products)): ?>
     <p>No products.</p>
 <?php else: ?>
-    <div class="products-container">
+    <div class="products-container mobile-padding">
         <?php foreach ($products as $product): ?>
             <?php
                 $isOnSale = isset($product["salePrice"]) && $product["salePrice"] > 0;

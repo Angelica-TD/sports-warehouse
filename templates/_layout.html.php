@@ -13,6 +13,21 @@
 
   <link rel="stylesheet" href="./assets/styles/style.css">
 
+  <!-- Page-specific styles : begin -->
+
+  <?php
+    // Normalise styles to array
+    $styles = isset($styles)
+        ? (is_array($styles) ? $styles : [$styles])
+        : [];
+
+    foreach ($styles as $src) :
+    ?>
+      <link rel="stylesheet" href="./assets/styles/<?= htmlspecialchars($src) ?>">
+    <?php endforeach; ?>
+
+  <!-- Page-specific styles : end -->
+
   <link rel="icon" type="image/x-icon" href="./assets/images/logos/sw-favicon.png">
 
   <script src="https://kit.fontawesome.com/fbcec5cfed.js" crossorigin="anonymous"></script>
