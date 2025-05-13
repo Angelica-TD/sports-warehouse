@@ -48,28 +48,10 @@
     <div class="section-constrained">
         <nav class="strip strip--bgdarkblue" aria-label="Product category navigation">
             <ul class="horizontal-list horizontal-list--categories round-left pill">
-                <li>
-                    <a href="#">Shoes</a>
-                </li>
-                <li>
-                    <a href="#">Helmets</a>
-                </li>
-                <li>
-                    <a href="#">Pants</a>
-                </li>
-                <li>
-                    <a href="#">Tops</a>
-                </li>
-                <li>
-                    <a href="#">Balls</a>
-                </li>
-                <li>
-                    <a href="#">Equipment</a>
-                </li>
-                <li>
-                    <a href="#">Training gear</a>
-                </li>
+                <?php include "_categories.html.php"; ?>
             </ul>
         </nav>
     </div>
 </header>
+
+
