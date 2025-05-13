@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sports Warehouse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" media="print">
+  <link rel="stylesheet" href="./styles/style.css">
+
+  <link rel="icon" type="image/x-icon" href="images/logos/sw-favicon.png">
+
+  <script src="https://kit.fontawesome.com/fbcec5cfed.js" crossorigin="anonymous"></script>
+  <meta name="description" content="desc">
+</head>
+
+<body class="flex-column gap">
+
+  <header class="flex-column gap-smaller">
+    <div class="section-wrapper--bgblue section-wrapper--padded">
+      <div class="section-constrained">
+        <div class="top-nav">
+          <nav aria-label="Main site navigation">
+            <input type="checkbox" name="mobile-menu" id="mobile-menu">
+            <label for="mobile-menu">
+              <span id="mobile-menu-icon"><i class="fa-solid fa-bars icon-large"></i> Menu</span>
+              <i id="mobile-menu-icon-close" class="fa-solid fa-xmark icon-large" title="Close mobile menu" aria-hidden="true"></i>
+            </label>
+            
+            <ul class="horizontal-list">
+              <li><a class="login icon-large" href="#">Login</a></li>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About SW</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">View Products</a></li>
+            </ul>
+          </nav>
+
+          <div class="account-actions">
+            <ul class="horizontal-list">
+              <li><a class="login icon-large" href="#">Login</a></li>
+              <li><a class="view-cart icon-large" href="#">View Cart</a></li>
+              <li><a class="items-in-cart orange-fill-hover" href="#">0 items</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="section-constrained site-header flex-column gap-smaller">
+      <div class="logo-container">
+        <a href="#" class="logo-link">
+          <h1 class="sr-only">Sports Warehouse</h1>
+        </a>
+      </div>
+
+      <form action="/sample.php">
+        <label class="sr-only" for="search-product">Search products</label>
+        <input type="text" id="search-product" name="search-product" placeholder="Search products">
+        <input class="submit-search" type="image" src="images/icons/search-icon.png" alt="Search">
+      </form>
+    </section>
+
+    <div class="section-constrained">
+      <nav class="strip strip--bgdarkblue" aria-label="Product category navigation">
+        <ul class="horizontal-list horizontal-list--categories round-left pill">
+          <li>
+            <a href="#">Shoes</a>
+          </li>
+          <li>
+            <a href="#">Helmets</a>
+          </li>
+          <li>
+            <a href="#">Pants</a>
+          </li>
+          <li>
+            <a href="#">Tops</a>
+          </li>
+          <li>
+            <a href="#">Balls</a>
+          </li>
+          <li>
+            <a href="#">Equipment</a>
+          </li>
+          <li>
+            <a href="#">Training gear</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="section-wrapper flex-column gap-smaller">
+
+    <main class="flex-column gap">
+      <section class="section-constrained banner">
+        <img class="banner__image" src="images/banner.png" alt="adidas soccer ball on grass" loading="lazy">
+        <div class="banner__overlay">
+          <div class="banner__copy">
+            <h2 class="overlay__title">View our brand new range of <span>Sports balls</span></h2>
+            <a role="button" href="#" class="banner__button orange-fill-hover">Shop now</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-constrained featured-products flex-column gap">
+        <h2 class="strip strip--mobile">Featured products</h2>
+
+        <div class="products-container">
+          <article class="product">
+            <a href="#">
+              <img class="product__image" src="images/adidas-ball.jpg" alt="adidas Euro16 Top Soccer Ball">
+            </a>
+            <div class="product__price product__price--sale">
+              $34.95
+              <small>
+                was <del>$46.00</del>
+              </small>
+            </div>
+            <a href="#">
+              <h3 class="product__name">
+                adidas Euro16 Top Soccer Ball
+              </h3>
+            </a>
+          </article>
+          <article class="product">
+            <a href="#">
+              <img class="product__image" src="images/helmet.jpg" alt="Pro-tec Classic Skate Helmet">
+            </a>
+            <div class="product__price">
+              <div>
+                $70.00
+              </div>
+            </div>
+            <a href="#">
+              <h3 class="product__name">
+                Pro-tec Classic Skate Helmet
+              </h3>
+            </a>
+          </article>
+          <article class="product">
+            <a href="#">
+              <img class="product__image" src="images/water-bottle.jpg" alt="Nike Sport 600ml Water Bottle">
+            </a>
+            <div class="product__price product__price--sale">
+              $15.00
+              <small>
+                was <del>$17.50</del>
+              </small>
+            </div>
+            <a href="#">
+              <h3 class="product__name">
+                Nike Sport 600ml Water Bottle
+              </h3>
+            </a>
+          </article>
+          <article class="product">
+            <a href="#">
+              <img class="product__image" src="images/boxing-gloves.jpg" alt="Sting ArmaPlus Boxing Gloves">
+            </a>
+            <div class="product__price">
+              <div>
+                $79.95
+              </div>
+            </div>
+            <a href="#">
+              <h3 class="product__name">
+                Sting ArmaPlus Boxing Gloves
+              </h3>
+            </a>
+          </article>
+          <article class="product">
+            <a href="#">
+              <img class="product__image" src="images/asics-boots.jpg" alt="Asics Gel Lethal Tigreor 8 IT Men's">
+            </a>
+            <div class="product__price product__price--sale">
+              $15.00
+              <small>
+                was <del>$17.50</del>
+              </small>
+            </div>
+            <a href="#">
+              <h3 class="product__name">
+                Asics Gel Lethal Tigreor 8 IT Men's
+              </h3>
+            </a>
+          </article>
+        </div>
+
+      </section>
+
+      <section class="section-constrained partnerships-container flex-column gap">
+        <h2 class="strip strip--mobile">Our brands and partnerships</h2>
+
+        <div class="partnerships-info flex-column gap">
+          <div class="intro">
+            <p>
+              These are some of our top brands and partnerships.
+            </p>
+            <p class="intro--blue">
+              The best of the best is here.
+            </p>
+          </div>
+          <div class="strip strip--bgdarkblue partner-logos">
+            <img src="images/logos/nike.png" alt="nike">
+            <img src="images/logos/adidas.png" alt="adidas">
+            <img src="images/logos/skins.png" alt="skins">
+            <img src="images/logos/asics.png" alt="asics">
+            <img src="images/logos/newbalance.png" alt="new balance">
+            <img src="images/logos/wilson.png" alt="wilson">
+          </div>
+        </div>
+      </section>
+
+      <section class="section-constrained subscribe-container flex-column gap">
+        <h2 class="strip strip--mobile">Sign up to our newsletter</h2>
+        <div id="notificationSuccess" class="notification notification-success">
+          Subscription successful! Thank you for subscribing.
+        </div>
+        <div id="notificationError" class="notification notification-error">
+          Please enter a valid email address.
+        </div>
+        <div class="subscribe-input-container" id="subcontainer">
+          <label class="sr-only" for="newsletter-sign-up">Sign up to newsletter</label>
+          <input type="text" id="newsletter-sign-up" name="newsletter-sign-up" placeholder="Your email address">
+           <a role="button" href="" id="subscribe-button" class="subscribe__button orange-fill-hover">Subscribe</a>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+  
+  <footer class="flex-column gap">
+    <div class="section-wrapper section-wrapper--bgblue">
+      <div class="section-constrained footer-nav">
+        <section class="site-nav" aria-labelledby="site-nav-heading">
+          <h2 id="site-nav-heading">Site navigation</h2>
+          <nav aria-label="Footer navigation">
+            <ul class="left-pill">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About SW</a></li>
+              <li><a href="#">Contact us</a></li>
+              <li><a href="#">View products</a></li>
+              <li><a href="#">Privacy policy</a></li>
+            </ul>
+          </nav>
+        </section>
+        <section class="product-categories" aria-labelledby="product-categories-heading">
+          <h2 id="product-categories-heading">Product categories</h2>
+          <ul class="left-pill">
+            <li><a href="#">Shoes</a></li>
+            <li><a href="#">Helmets</a></li>
+            <li><a href="#">Pants</a></li>
+            <li><a href="#">Tops</a></li>
+            <li><a href="#">Balls</a></li>
+            <li><a href="#">Equipment</a></li>
+            <li><a href="#">Training gear</a></li>
+          </ul>
+        </section>
+
+        <section class="contact-info" aria-labelledby="contact-sw-heading">
+          <h2 id="contact-sw-heading">Contact Sports Warehouse</h2>
+          <div class="socials">
+            <a href="#">
+              <img src="images/socials/facebook.png" alt="Like us on Facebook">
+              <h3>Facebook</h3>
+            </a>
+            <a href="#">
+              <img src="images/socials/twitter.png" alt="Follow us on Twitter">
+              <h3>Twitter</h3>
+            </a>
+            <a href="#">
+              <img src="images/socials/other.png" alt="Follow us on other platform">
+              <h3>Other</h3>
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </div>
+    <div class="section-constrained copyright">
+      <p>&copy; Copyright 2222 Sports Warehouse.</p>
+        <p>All rights reserved.</p>
+        <p>Website made by Awesomesauce Design and Angie.</p>
+    </div>
+  </footer>
+
+
+  
+  <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2024/12/03/08/20241203082132-69RIF0T4.js"></script>
+  <script src="js/script.js"></script>
+
+      
+</body>
+
+</html>
