@@ -1,0 +1,110 @@
+/* Form */
+
+#contactForm {
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin: auto;
+}
+
+@media screen and (min-width: 992px) {
+    #contactForm {
+        max-width: 600px;
+    }
+}
+
+#contactForm input,
+#contactForm textarea {
+    padding: 10px;
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid var(--grey);
+}
+
+.input-container {
+    position: relative;
+}
+
+/* .input-container>label:not(.error),
+.input-single>label:not(.error) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    color: rgb(128 127 127);
+    height: 100%;
+    padding: 10px 15px;
+    overflow: hidden;
+    text-align: start;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    pointer-events: none;
+    transform-origin: 0 0;
+    transition: opacity .1s ease-in-out, transform .2s ease-in-out;
+} */
+
+/* .floating:focus~label:not(.error),
+.floating:not(:placeholder-shown)~label:not(.error) {
+    color: rgb(166, 166, 166);
+    transform: scale(.65) translateY(-.5rem);
+} */
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#contactForm button[type="submit"] {
+    width: fit-content;
+    padding: 8px 50px;
+    background-color: #FB6806;
+    border-radius: 5px;
+    transition: background-color ease .2s;
+}
+
+#contactForm button[type="submit"] img {
+    max-width: 25px;
+}
+
+#contactForm button[type="submit"]:hover {
+    background-color: #00aced;
+}
+
+@media screen and (max-width: 991px) {
+    #contactForm button[type="submit"] {
+        margin-left: auto;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .input-group {
+        flex-direction: row;
+    }
+
+    .input-group>* {
+        flex-grow: 1;
+        width: 100%;
+    }
+}
+
+/* error messages */
+.error-message {
+    font-style: italic;
+    color: #fb6806;
+    font-size: .8em;
+    font-weight: bold;
+    position: absolute;
+}
+
+.input-container:has(.error-message) input {
+    background-color: #ffebdd;
+    border-color: #ffebdd;
+}
+
+#confirmationMessage {
+    flex-grow: 1;
+    text-align: center;
+}

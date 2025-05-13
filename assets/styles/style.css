@@ -78,6 +78,10 @@ img{
   margin: auto;
 }
 
+button{
+  cursor: pointer;
+}
+
 /* FS */
 .top-nav,
 footer nav{
@@ -535,7 +539,7 @@ main p:not(:last-of-type){
 }
 
 @media screen and (max-width: 991px) {
-  .products-container{
+  .mobile-padding{
     padding-inline: 15px;
   }
 }
