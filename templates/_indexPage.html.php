@@ -1,3 +1,11 @@
+<section class="section-constrained">
+  <nav class="strip strip--bgdarkblue" aria-label="Product category navigation">
+    <ul class="horizontal-list horizontal-list--categories round-left pill">
+      <?php include "_categories.html.php"; ?>
+    </ul>
+  </nav>
+</section>
+
 <section class="section-constrained banner">
   <img class="banner__image" src="./assets/images/banner.png" alt="adidas soccer ball on grass" loading="lazy">
   <div class="banner__overlay">
@@ -42,5 +50,5 @@
 </section>
 
 <?php
-  include "_subscribeSection.html.php";
-  ?>
+include "_subscribeSection.html.php";
+?>
