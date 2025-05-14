@@ -38,11 +38,8 @@
             </a>
         </div>
 
-        <form action="/sample.php">
-            <label class="sr-only" for="search-product">Search products</label>
-            <input type="text" id="search-product" name="search-product" placeholder="Search products">
-            <input class="submit-search" type="image" src="./assets/images/icons/search-icon.png" alt="Search">
-        </form>
+        <?php include "_searchInput.html.php"; ?>
+
     </section>
 
     <section class="section-constrained">

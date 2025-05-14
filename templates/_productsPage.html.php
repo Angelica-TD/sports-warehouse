@@ -4,7 +4,12 @@
 <?php else: ?>
 
     <div class="results-count mobile-padding">
-        Showing <?= count($products) ?> out of <?= $totalProducts ?> results for <strong><?= htmlspecialchars($categoryName) ?></strong>
+        Showing <?= count($products) ?> out of <?= $totalProducts ?> results for
+        <strong>
+            <?= !empty($search) 
+            ? '"' . htmlspecialchars($search) . '"' 
+            : htmlspecialchars($categoryName) ?>
+        </strong>
     </div>
 
     <div class="products-container mobile-padding">

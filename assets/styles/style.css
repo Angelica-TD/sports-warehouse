@@ -503,8 +503,8 @@ main p:not(:last-of-type){
 
 .product{
   display: grid;
-  grid-template-rows: auto;
-  /* grid-template-rows: subgrid; */
+  /* grid-template-rows: auto; */
+  grid-template-rows: subgrid;
   grid-row: span 3;
   border: 1px solid var(--light-grey);
   border-radius: 5px;
