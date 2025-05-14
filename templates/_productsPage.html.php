@@ -3,13 +3,23 @@
     <p>No products.</p>
 <?php else: ?>
 
+    <?php if (empty($search)): ?>
+
+    <h2 class="strip strip--mobile">
+        <?= htmlspecialchars($categoryName) ?>
+    </h2>
+
+    <?php endif ?>
+
     <div class="results-count mobile-padding">
-        Showing <?= count($products) ?> out of <?= $totalProducts ?> results for
-        <strong>
-            <?= !empty($search) 
-            ? '"' . htmlspecialchars($search) . '"' 
-            : htmlspecialchars($categoryName) ?>
+        Showing <?= count($products) ?> out of <?= $totalProducts ?> results 
+        <?php if (!empty($search)): ?>
+            for <strong>"<?= htmlspecialchars($search) ?>"</strong>
         </strong>
+
+        <?php endif ?>
+        
+        
     </div>
 
     <div class="products-container mobile-padding">
