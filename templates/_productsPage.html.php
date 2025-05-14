@@ -20,7 +20,7 @@
                 $priceFormatted = sprintf('$%1.2f', $price);
                 $originalPriceFormatted = $isOnSale ? sprintf('$%1.2f', $product["price"]) : null;
             ?>
-            <article class="product">
+            <article class="product product--list">
                 <a href="product.php?id=<?= $product["itemId"] ?>">
                     <img class="product__image" src="./assets/images/products/<?= $product["photo"] ?>" alt="<?= htmlspecialchars($product["description"]) ?>">
                 </a>

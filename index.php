@@ -6,6 +6,11 @@
 
   // Config
   $title = "Home";
+  
+  $styles = [
+    "products.css"
+  ];
+
   $scripts = [
     "subscribe.js"
   ];

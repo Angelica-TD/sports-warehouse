@@ -1,14 +1,15 @@
-<section class="section-constrained featured-products flex-column gap">
+<section class="section-constrained flex-column gap mobile-padding">
     <?php if (empty($item)): ?>
         <p>No product found</p>
     <?php else: ?>
 
-        <div class="single-product mobile-padding">
-            <article class="product">
-                <a href="product.php?id=<?= $item["itemId"] ?>">
-                    <img class="product__image" src="./assets/images/products/<?= $item["photo"] ?>" alt="<?= htmlspecialchars($item["description"]) ?>">
-                </a>
-
+        <article class="product product--single">
+            
+            <img class="product__image--single" src="./assets/images/products/<?= $item["photo"] ?>" alt="<?= htmlspecialchars($item["description"]) ?>">
+                
+            <section class="product">
+                <h2 class="product__name product__name--single"><?= htmlspecialchars($item['itemName']) ?></h2>
+                
                 <div class="product__price <?= $isOnSale ? 'product__price--sale' : '' ?>">
                     <?= $priceFormatted ?>
                     <?php if ($isOnSale): ?>
@@ -16,18 +17,13 @@
                     <?php endif ?>
                 </div>
 
-                <a href="product.php?id=<?= $item["itemId"] ?>">
-                    <h3 class="product__name">
-                        <?= htmlspecialchars($item["itemName"]) ?>
-                    </h3>
-                </a>
-
-                <p>
+                <p class="product__description">
                     <?= htmlspecialchars($item["description"]) ?>
                 </p>
 
-            </article>
-        </div>
+            </section>           
+
+        </article>
 
     <?php endif ?>
 </section>

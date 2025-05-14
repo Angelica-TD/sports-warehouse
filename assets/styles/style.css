@@ -1,6 +1,6 @@
 /* CSS normalisation = override styles that are causing problems */
 /*! modern-normalize v3.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
-*,::after,::before{box-sizing:border-box}html{font-family:system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji';line-height:1.15;-webkit-text-size-adjust:100%;tab-size:4}body{margin:0}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',Menlo,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{border-color:currentcolor}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}[type=button],[type=reset],[type=submit],button{appearance:button;-webkit-appearance:button;border:0}legend{padding:0}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{appearance:textfield;-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}
+*,::after,::before{box-sizing:border-box}html{font-family:system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji';line-height:1.4;-webkit-text-size-adjust:100%;tab-size:4}body{margin:0}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',Menlo,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{border-color:currentcolor}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.4;margin:0}[type=button],[type=reset],[type=submit],button{appearance:button;-webkit-appearance:button;border:0}legend{padding:0}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{appearance:textfield;-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}
 
 * {
   box-sizing: border-box;
@@ -30,7 +30,7 @@
   --light-blue: #00ACED;
   --mid-blue: #006989;
   --dark-blue: #002936;
-  --light-grey: hsla(0, 1%, 81%, 1);
+  --light-grey: hsl(0deg 0% 59.15%);
   --grey: hsla(0, 0%, 35%, 1);
   --orange: #FB6806;
   --white: #FFFFFF;
@@ -490,75 +490,6 @@ main p:not(:last-of-type){
     height: 3.6rem;
     width: 13rem;
     line-height: 2.3;
-  }
-}
-
-/* PRODUCTS */
-
-.products-container{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-}
-
-.product{
-  display: grid;
-  /* grid-template-rows: auto; */
-  grid-template-rows: subgrid;
-  grid-row: span 3;
-  border: 1px solid var(--light-grey);
-  border-radius: 5px;
-  padding: 1rem;
-  text-align: center;
-  row-gap: 1.5rem;
-  transition: box-shadow .2s ease-in-out;
-}
-
-.product:hover{
-  box-shadow: 0.7px 0.7px 4px 0px hsla(23, 100%, 52%, 0.75);
-}
-
-.product__image{
-  max-width: 12.5rem;
-}
-
-.product__price{
-  font-size: 2.2rem;
-  font-weight: 400;
-  align-self: center;
-}
-
-.product__price--sale{
-  color: var(--orange);
-}
-
-.product__price small{
-  font-size: 1.1rem;
-  color: var(--light-grey);
-  display: block;
-  text-transform: uppercase;
-}
-
-.product__price del{
-  font-size: 1.6rem;
-}
-
-.product__name{
-  font-size: 1.5rem;
-  color: var(--mid-blue);
-  font-weight: 400;
-}
-
-@media screen and (max-width: 991px) {
-  .mobile-padding{
-    padding-inline: 15px;
-  }
-}
-
-@media screen and (min-width: 992px) {
-  .products-container{
-    grid-template-columns: repeat(5, 1fr);
-    
   }
 }
 
