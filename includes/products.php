@@ -41,8 +41,7 @@
 
         $stmt = $db->prepareStatement($sql);
         $stmt->bindValue(":categoryId", $categoryId, PDO::PARAM_INT);
-        $categoryResult = $db->executeSQL($stmt);
-        $categoryName = $categoryResult[0]['categoryName'] ?? 'Unknown';
+        $categoryName = $db->executeSQLReturnOneValue($stmt);
 
 
         // Count total products in this category
