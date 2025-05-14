@@ -80,6 +80,7 @@ img{
 
 button{
   cursor: pointer;
+  line-height: 1;
 }
 
 /* FS */

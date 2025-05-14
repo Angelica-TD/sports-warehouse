@@ -22,8 +22,13 @@
 }
 
 .product--single{
-    grid-template-columns: 1fr 1fr;
     text-align: left;
+}
+
+@media screen and (min-width: 768px) {
+    .product--single{
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 .product--single .product{
@@ -40,10 +45,27 @@
 }
 
 .product__image--single {
-    max-width: unset;
-    border-right: 1px solid #dedede;
     border-radius: unset;
-    margin-right: 5rem;
+    padding-bottom: 20px;
+}
+
+@media screen and (max-width: 767px) {
+    .product__image--single{
+        border-bottom: 1px solid #dedede;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .product__image--single {
+        border-right: 1px solid #dedede;
+        margin-right: 5rem;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .product__image--single {
+        max-width: unset;
+    }
 }
 
 .product__price {
