@@ -3,6 +3,7 @@
   require_once "includes/common.php";
   require_once "includes/categories.php";
   require_once "includes/products.php";
+  require_once "includes/pagination.php";
 
   // Config
   $title = "Shop $categoryName";

@@ -11,3 +11,4 @@
 
   // Execute query (get the featured products)
   $categories = $db->executeSQL($stmt);
+  $categoryId = null;

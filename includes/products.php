@@ -1,4 +1,5 @@
 <?php
+
     // Fetch featured products
     $sql = <<<SQL
     SELECT	itemId, itemName, photo, price, salePrice, description
