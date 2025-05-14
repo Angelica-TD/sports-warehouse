@@ -6,6 +6,10 @@
 ?>
 
 <li>
-    <a href="/products/<?= $categorySlug ?>"><?= $category["categoryName"] ?></a>
+    <a
+     href="products.php?id=<?= $category["categoryId"] ?>"
+     <?= ($category['categoryId'] == $categoryId) ? "class='active'" : "" ?>>
+        <?= $category["categoryName"] ?>
+    </a>
 </li>
 <?php endforeach ?>

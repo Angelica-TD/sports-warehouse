@@ -155,6 +155,12 @@ footer nav{
   flex-direction: column;
 }
 
+.flex-row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .gap{
   gap: 2.5rem;
 }
@@ -400,6 +406,11 @@ header form{
     width: 220px;
     padding-inline: 20px;
   }
+}
+
+/* CATEGORY HORIZONTAL LIST */
+.horizontal-list--categories a.active{
+  background-color: var(--light-blue);
 }
 
 /* MAIN */

@@ -1,0 +1,31 @@
+.pagination a.page-number{
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: #d9d9d9;
+}
+
+.pagination a.page-number:hover{
+    background-color: #00aced;
+    color: #fff;
+}
+
+.pagination a.disabled {
+    pointer-events: none;
+    color: #aaa;
+    text-decoration: none;
+}
+
+.pagination a.enabled {
+    font-weight: bold;
+    text-decoration: none;
+    color: #002936;
+}
+
+.pagination a.enabled:hover {
+    color: #00aced;
+}
+
+.pagination a.active {
+    background-color: #002936;
+    color: #fff;   
+}
