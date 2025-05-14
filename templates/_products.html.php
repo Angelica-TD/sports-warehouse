@@ -3,12 +3,6 @@
 <?php else: ?>
     <div class="products-container mobile-padding">
         <?php foreach ($products as $product): ?>
-            <?php
-                $isOnSale = isset($product["salePrice"]) && $product["salePrice"] > 0;
-                $price = $isOnSale ? $product["salePrice"] : $product["price"];
-                $priceFormatted = sprintf('$%1.2f', $price);
-                $originalPriceFormatted = $isOnSale ? sprintf('$%1.2f', $product["price"]) : null;
-            ?>
             <article class="product">
                 <a href="product.php?id=<?= $product["itemId"] ?>">
                     <img class="product__image" src="./assets/images/products/<?= $product["photo"] ?>" alt="<?= htmlspecialchars($product["description"]) ?>">

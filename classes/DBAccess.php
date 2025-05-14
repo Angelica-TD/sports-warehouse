@@ -114,6 +114,24 @@ class DBAccess
     return $value;
   }
 
+  public function executeSQLReturnOneRow($stmt)
+{
+    try
+    {
+        // Execute query and get a single row (first row)
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch full row
+    }
+    catch(PDOException $e)
+    {
+        die("Query failed: " . $e->getMessage());
+    }
+
+    // Return the row (associative array)
+    return $row;
+}
+
+
   /**
    * Execute a PDO statement for an INSERT, UPDATE, DELETE query
    *

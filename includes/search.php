@@ -62,4 +62,10 @@
 
         // Execute query
         $products = $db->executeSQL($stmt);
+    } else {
+
+        // Redirect to home
+        header("Location: index.php");
+        exit;
+    
     }
