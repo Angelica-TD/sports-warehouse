@@ -45,6 +45,14 @@
         </form>
     </section>
 
+    <section class="section-constrained">
+        <nav class="strip strip--bgdarkblue" aria-label="Product category navigation">
+            <ul class="horizontal-list horizontal-list--categories round-left pill">
+            <?php include "_categories.html.php"; ?>
+            </ul>
+        </nav>
+    </section>
+
     
 </header>
 
