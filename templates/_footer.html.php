@@ -16,7 +16,7 @@
             <section class="product-categories" aria-labelledby="product-categories-heading">
                 <h2 id="product-categories-heading">Product categories</h2>
                 <ul class="left-pill">
-                    <?php include "_categories.html.php"; ?>
+                    <?php include "_categoriesList.html.php"; ?>
                 </ul>
             </section>
 
