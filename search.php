@@ -13,7 +13,7 @@
   ob_start();
 
   // Include the page-specific template
-  include_once TEMPLATES_DIR . "_productsPage.html.php";
+  include_once TEMPLATES_DIR . "_productsListingPage.html.php";
 
   // Stop output buffering - store output into the $content variable
   $content = ob_get_clean();

@@ -13,7 +13,7 @@
 
   <?php
   $products = $featuredProducts;
-  include "_products.html.php";
+  include "_featuredProducts.html.php";
   ?>
 
 </section>
