@@ -22,11 +22,9 @@
         
     </div>
 
-    <?php
-        include "_productsList.html.php";
-    ?>
+    <?php include BLOCK_TEMPLATES_DIR . "_products.html.php"; ?>
 
-    <?php include "_pagination.html.php"; ?>
+    <?php include BLOCK_TEMPLATES_DIR . "_pagination.html.php"; ?>
 
 
 <?php endif ?>
