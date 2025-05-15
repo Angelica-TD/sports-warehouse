@@ -13,10 +13,10 @@
     $dbUsername = "root";
     $dbPassword = "";
   } else {
-    $dbServer   = getenv("DB_SERVER");
-    $dbDatbase  = getenv("DB_DATABASE");
-    $dbUsername = getenv("DB_USERNAME");
-    $dbPassword = getenv("DB_PASSWORD");
+    $dbServer   = $config['DB_SERVER'];
+    $dbDatbase  = $config['DB_DATABASE'];
+    $dbUsername = $config['DB_USERNAME'];
+    $dbPassword = $config['DB_PASSWORD'];
   }
 
   // Error handling

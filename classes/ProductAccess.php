@@ -6,7 +6,6 @@ class ProductAccess
 {
 
   private DBAccess $db;
-  private int $itemsPerPage = 1;
 
   public function __construct(DBAccess $db)
   {

@@ -4,6 +4,8 @@
 /logs/
 
 /assets/images/
+/vendor/
+/includes/secrets.php
 server.php
 
 .vscode
