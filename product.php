@@ -33,4 +33,4 @@
   $content = ob_get_clean();
 
   // Include the main layout template
-  include_once TEMPLATES_DIR . "_layout.html.php";
+  include_once LAYOUT_TEMPLATES_DIR . "_main.html.php";

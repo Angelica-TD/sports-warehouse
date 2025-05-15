@@ -8,6 +8,7 @@
   define("ROOT_DIR", __DIR__ . "/../");
   define("INCLUDES_DIR", ROOT_DIR . "includes/");
   define("TEMPLATES_DIR", ROOT_DIR . "templates/");
+  define("LAYOUT_TEMPLATES_DIR", ROOT_DIR . "templates/layouts/");
   define("PAGE_TEMPLATES_DIR", ROOT_DIR . "templates/pages/");
   define("BLOCK_TEMPLATES_DIR", ROOT_DIR . "templates/components/");
   define("SCRIPTS_DIR", ROOT_DIR . "assets/js/");

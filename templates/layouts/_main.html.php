@@ -37,7 +37,7 @@
 
 <body class="flex-column gap">
   
-  <?php include "_header.html.php"; ?>
+  <?php include BLOCK_TEMPLATES_DIR . "_header.html.php"; ?>
 
   <div class="section-wrapper flex-column gap-smaller">
 
@@ -61,7 +61,7 @@
         <script src="./assets/js/<?= htmlspecialchars($src) ?>"></script>
     <?php endforeach; ?>
 
-  <?php include "_footer.html.php"; ?>
+  <?php include BLOCK_TEMPLATES_DIR . "_footer.html.php"; ?>
 
 </body>
 </html>
