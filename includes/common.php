@@ -19,3 +19,6 @@
 
   // Open the database connection
   $db->connect();
+  
+  // This is used for the categories horizontal strip in every page
+  require_once INCLUDES_DIR . "categories.php";

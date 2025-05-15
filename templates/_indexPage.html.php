@@ -11,10 +11,7 @@
 <section class="section-constrained featured-products flex-column gap">
   <h2 class="strip strip--mobile">Featured products</h2>
 
-  <?php
-  $products = $featuredProducts;
-  include "_featuredProducts.html.php";
-  ?>
+  <?php include "_productsList.html.php"; ?>
 
 </section>
 

@@ -61,7 +61,7 @@
 
     </div>
 
-    <button type="submit" name="submitComingSoon">
+    <button type="submit" name="submitForm">
       <img src="./assets/images/icons/send.png" alt="">
     </button>
 

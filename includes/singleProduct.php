@@ -1,29 +1,18 @@
 <?php
 
-    if (!empty($_GET["id"])) {
-        // Get the ID (and sanitise/validate it)
-        $itemId = intval($_GET["id"]);
-        $categoryId = null;
+    // Dependencies
+    require_once ROOT_DIR . "classes/ProductAccess.php";
 
-        // Fetch item
-        $sql = <<<SQL
-                SELECT	itemId, itemName, photo, price, salePrice, description
-                FROM    item
-                WHERE   itemId = :itemId
-                SQL;
-
-        $stmt = $db->prepareStatement($sql);
-        $stmt->bindValue(":itemId", $itemId, PDO::PARAM_INT);
-        $item = $db->executeSQLReturnOneRow($stmt);
-        $isOnSale = isset($item["salePrice"]) && $item["salePrice"] > 0;
-        $price = $isOnSale ? $item["salePrice"] : $item["price"];
-        $priceFormatted = sprintf('$%1.2f', $price);
-        $originalPriceFormatted = $isOnSale ? sprintf('$%1.2f', $item["price"]) : null;
-
-    } else {
-
-        // No product ID given - redirect to home
+    if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
         header("Location: index.php");
         exit;
-    
     }
+
+    $productAccess = new ProductAccess($db);
+
+    $itemId = (int) $_GET['id'];
+
+    $item = $productAccess->getSingleProductByID($itemId);
+    $priceFormatted = $item['priceFormatted'];
+    $originalPriceFormatted = $item['originalPriceFormatted'];
+    $isOnSale = $item['isOnSale'];

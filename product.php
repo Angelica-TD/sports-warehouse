@@ -1,7 +1,6 @@
 <?php
 
   require_once "includes/common.php";
-  require_once "includes/categories.php";
   require_once "includes/singleProduct.php";
 
   // Config

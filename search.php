@@ -1,12 +1,11 @@
 <?php
 
   require_once "includes/common.php";
-  require_once "includes/categories.php";
   require_once "includes/search.php";
   require_once "includes/pagination.php";
 
   // Config
-  $title = "Search results for $search";
+  $title = "Search results for $searchTerm";
   $styles = [
     "products.css"
   ];

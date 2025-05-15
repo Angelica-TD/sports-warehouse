@@ -1,8 +1,7 @@
 <?php
 
   require_once "includes/common.php";
-  require_once "includes/categories.php";
-  require_once "includes/products.php";
+  require_once "includes/featuredProducts.php";
 
   // Config
   $title = "Home";
