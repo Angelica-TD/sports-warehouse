@@ -8,10 +8,11 @@
     if ($currentPageUrl === "search.php" && !empty($_GET['search-product'])) {
 
         $searchTerm = urlencode(trim($_GET['search-product']));
+        
         $baseUrl = "search.php?search-product={$searchTerm}&page=";
     
-    } elseif ($currentPageUrl === 'products.php' && isset($categoryId)) {
+    } elseif ($currentPageUrl === 'products.php' && isset($_GET['id'])) {
         
-        $baseUrl = "products.php?id=" . urlencode($categoryId) . "&page=";
+        $baseUrl = "products.php?id=" . urlencode($_GET['id']) . "&page=";
         
     }
