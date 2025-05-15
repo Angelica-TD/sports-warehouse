@@ -15,7 +15,7 @@
   ob_start();
 
   // Include the page-specific template
-  include_once TEMPLATES_DIR . "_contactPage.html.php";
+  include_once PAGE_TEMPLATES_DIR . "_contactUs.html.php";
 
   // Stop output buffering - store output into the $content variable
   $content = ob_get_clean();
