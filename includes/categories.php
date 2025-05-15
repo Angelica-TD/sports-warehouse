@@ -1,5 +1,7 @@
 <?php
 
+  // TODO: Make categories retrieval class-based (just like products)
+
   // Define
   $sql = <<<SQL
   SELECT	categoryId, categoryName
