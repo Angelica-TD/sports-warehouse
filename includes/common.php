@@ -16,6 +16,7 @@
   define("IMAGES_DIR", ROOT_DIR . "assets/images/");
   define('COMPANY_NAME', 'Sports Warehouse');
 
+  // TODO: Enable .env
   $config = require INCLUDES_DIR . 'secrets.php';
 
   // Database connection (create DBAccess instance in the $db variable)
