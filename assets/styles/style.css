@@ -714,3 +714,9 @@ main p:not(:last-of-type){
 .subscribe-container{
   position: relative;
 }
+
+@media screen and (max-width: 991px) {
+  .mobile-padding {
+      padding-inline: 15px;
+  }
+}
