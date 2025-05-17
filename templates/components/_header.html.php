@@ -42,13 +42,13 @@
 
     </section>
 
-    <section class="section-constrained">
+    <div class="section-constrained">
         <nav class="strip strip--bgdarkblue" aria-label="Product category navigation">
             <ul class="horizontal-list horizontal-list--categories round-left pill">
             <?php include "_categoriesList.html.php"; ?>
             </ul>
         </nav>
-    </section>
+    </div>
 
     
 </header>
