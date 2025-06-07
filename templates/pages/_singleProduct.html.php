@@ -1,24 +1,24 @@
 <section class="section-constrained flex-column gap mobile-padding">
-    <?php if (empty($item)): ?>
+    <?php if (empty($productData)): ?>
         <p>No product found</p>
     <?php else: ?>
 
         <article class="product product--single">
             
-            <img class="product__image--single" src="./assets/images/products/<?= $item["photo"] ?>" alt="<?= htmlspecialchars($item["description"]) ?>">
+            <img class="product__image--single" src="./assets/images/products/<?= $productData["photo"] ?>" alt="<?= htmlspecialchars($productData["description"]) ?>">
                 
             <section class="product">
-                <h2 class="product__name product__name--single"><?= htmlspecialchars($item['itemName']) ?></h2>
+                <h2 class="product__name product__name--single"><?= htmlspecialchars($productData['productName']) ?></h2>
                 
-                <div class="product__price <?= $isOnSale ? 'product__price--sale' : '' ?>">
-                    <?= $priceFormatted ?>
-                    <?php if ($isOnSale): ?>
-                        <small>was <del><?= $originalPriceFormatted ?></del></small>
+                <div class="product__price <?= $productData['onSale'] ? 'product__price--sale' : '' ?>">
+                    <?= $productData['finalPriceFormatted'] ?>
+                    <?php if ($productData['onSale']): ?>
+                        <small>was <del><?= $productData['originalPriceFormatted'] ?></del></small>
                     <?php endif ?>
                 </div>
 
                 <p class="product__description">
-                    <?= htmlspecialchars($item["description"]) ?>
+                    <?= htmlspecialchars($productData["description"]) ?>
                 </p>
 
             </section>           

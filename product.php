@@ -2,24 +2,22 @@
 
   // Dependencies
   require_once "includes/common.php";
-  require_once "classes/ProductAccess.php";
+  require_once "classes/Product.php";
 
   if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
       header("Location: index.php");
       exit;
   }
 
-  $productAccess = new ProductAccess($db);
+  $product = new Product($db);
 
   $itemId = (int) $_GET['id'];
 
-  $item = $productAccess->getSingleProductByID($itemId);
-  $priceFormatted = $item['priceFormatted'];
-  $originalPriceFormatted = $item['originalPriceFormatted'];
-  $isOnSale = $item['isOnSale'];
+  $product->loadSingleProductByID($itemId);
+  $productData = $product->getProductData();
 
   // Config
-  $title = $item["itemName"];
+  $title = $productData['productName'];
   $styles = [
     "products.css"
   ];

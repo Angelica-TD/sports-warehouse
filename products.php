@@ -2,22 +2,22 @@
 
   // Dependencies
   require_once "includes/common.php";
-  require_once "classes/ProductAccess.php";
+  require_once "classes/Product.php";
   require_once "includes/pagination.php";
 
-  $productAccess = new ProductAccess($db);
+  $product = new Product($db);
     
   // Fetch products by category
   // Get categoryId and page from URL or default values
   $categoryId = isset($_GET['id']) ? intval($_GET['id']) : 0;
   $currentPage = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
 
-  $result = $productAccess->getProductsByCategory($categoryId, $currentPage);
+  $result = $product->getProductsByCategory($categoryId, $currentPage);
   $products = $result['products'];
   $totalProducts = $result['totalProducts'];
   $totalPages = $result['totalPages'];
 
-  $categoryName = $productAccess->getCategoryName($categoryId);
+  $categoryName = $product->getCategoryName($categoryId);
 
   // Redirect if page out of range
   if ($currentPage != $result['currentPage']) {

@@ -2,14 +2,50 @@
 
 require_once 'DBAccess.php';
 
-class ProductAccess
+class Product
 {
 
-  private DBAccess $db;
+  private $_productName;
+  private $_productID;
+  private $_originalPrice;
+  private $_photo;
+  private $_description;
+  private $_salePrice;
+  private DBAccess $_db;
 
   public function __construct(DBAccess $db)
   {
-    $this->db = $db;
+    $this->_db = $db;
+  }
+
+  // getters
+
+  public function getProductID(): int { return $this->_productID; }
+  public function getProductName(): string { return $this->_productName; }
+  public function getOriginalPrice(): float { return $this->_originalPrice; }
+  public function getSalePrice(): float { return $this->_salePrice; }
+  
+  public function getFinalPrice(): float 
+  { 
+    // if there is a salePrice, return that, otherwise return original price
+    return $this->hasValidSalePrice() ? $this->_salePrice : $this->_originalPrice;
+  }
+
+  public function getOriginalPriceFormatted(): string
+  {
+      return sprintf('$%1.2f', $this->_originalPrice);
+  }
+
+  public function getSalePriceFormatted(): ?string
+  {
+      return $this->hasValidSalePrice()
+        ? sprintf('$%1.2f', $this->_salePrice)
+        : null;
+  }
+
+  public function getFinalPriceFormatted(): string
+  {
+      return sprintf('$%1.2f', $this->getFinalPrice());
   }
 
   /**
@@ -30,8 +66,8 @@ class ProductAccess
     SQL;
 
     // Prepare the statement
-    $stmt = $this->db->prepareStatement($sql);
-    return $this->db->executeSQL($stmt);
+    $stmt = $this->_db->prepareStatement($sql);
+    return $this->_db->executeSQL($stmt);
   }
 
   /**
@@ -56,9 +92,9 @@ class ProductAccess
         WHERE categoryId = :categoryId
     SQL;
 
-    $stmt = $this->db->prepareStatement($sql);
+    $stmt = $this->_db->prepareStatement($sql);
     $stmt->bindValue(":categoryId", $categoryId, PDO::PARAM_INT);
-    $totalProducts = $this->db->executeSQLReturnOneValue($stmt);
+    $totalProducts = $this->_db->executeSQLReturnOneValue($stmt);
 
     // Calculate total pages
     $totalPages = ($totalProducts > 0) ? ceil($totalProducts / $itemsPerPage) : 1;
@@ -77,12 +113,12 @@ class ProductAccess
         LIMIT :limit OFFSET :offset
     SQL;
 
-    $stmt = $this->db->prepareStatement($sql);
+    $stmt = $this->_db->prepareStatement($sql);
     $stmt->bindValue(":categoryId", $categoryId, PDO::PARAM_INT);
     $stmt->bindValue(":limit", $itemsPerPage, PDO::PARAM_INT);
     $stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
 
-    $products = $this->db->executeSQL($stmt);
+    $products = $this->_db->executeSQL($stmt);
 
     return [
       'products' => $products,
@@ -91,7 +127,6 @@ class ProductAccess
       'currentPage' => $currentPage
     ];
   }
-
 
   /**
    * Get the category name by ID
@@ -106,9 +141,9 @@ class ProductAccess
             FROM category 
             WHERE categoryId = :categoryId
             SQL;
-    $stmt = $this->db->prepareStatement($sql);
+    $stmt = $this->_db->prepareStatement($sql);
     $stmt->bindValue(":categoryId", $categoryId, PDO::PARAM_INT);
-    $categoryName = $this->db->executeSQLReturnOneValue($stmt);
+    $categoryName = $this->_db->executeSQLReturnOneValue($stmt);
 
     return $categoryName ?: null;
   }
@@ -131,9 +166,9 @@ class ProductAccess
           OR description LIKE :searchTerm
       SQL;
 
-    $stmt = $this->db->prepareStatement($sql);
+    $stmt = $this->_db->prepareStatement($sql);
     $stmt->bindValue(":searchTerm", "%{$searchTerm}%", PDO::PARAM_STR);
-    $totalProducts = $this->db->executeSQLReturnOneValue($stmt);
+    $totalProducts = $this->_db->executeSQLReturnOneValue($stmt);
 
     // Calculate total pages
     $totalPages = ($totalProducts > 0) ? ceil($totalProducts / $itemsPerPage) : 1;
@@ -149,11 +184,11 @@ class ProductAccess
           LIMIT :limit OFFSET :offset
       SQL;
 
-    $stmt = $this->db->prepareStatement($sql);
+    $stmt = $this->_db->prepareStatement($sql);
     $stmt->bindValue(":searchTerm", "%{$searchTerm}%", PDO::PARAM_STR);
     $stmt->bindValue(":limit", $itemsPerPage, PDO::PARAM_INT);
     $stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
-    $products = $this->db->executeSQL($stmt);
+    $products = $this->_db->executeSQL($stmt);
 
     return [
       'products' => $products,
@@ -163,14 +198,13 @@ class ProductAccess
     ];
   }
 
-
   /**
    * Get a single product by ID
    *
    * @param int $itemId
    * @return array Resultset data (1 row)
    */
-  public function getSingleProductByID(int $itemId): ?array
+  public function loadSingleProductByID(int $itemId)
   {
     try {
       $sql = <<<SQL
@@ -179,25 +213,50 @@ class ProductAccess
                 WHERE   itemId = :itemId
                 SQL;
 
-      $stmt = $this->db->prepareStatement($sql);
+      $stmt = $this->_db->prepareStatement($sql);
       $stmt->bindValue(":itemId", $itemId, PDO::PARAM_INT);
-      $item = $this->db->executeSQLReturnOneRow($stmt);
+      $item = $this->_db->executeSQLReturnOneRow($stmt);
 
-      if (!$item) {
-        return null;
-      }
-
-      $isOnSale = isset($item["salePrice"]) && $item["salePrice"] > 0;
-      $price = $isOnSale ? $item["salePrice"] : $item["price"];
-
-      $item['priceFormatted'] = sprintf('$%1.2f', $price);
-      $item['originalPriceFormatted'] = $isOnSale ? sprintf('$%1.2f', $item["price"]) : null;
-      $item['isOnSale'] = $isOnSale;
-
-      return $item;
+      //populate the private properties with the retrieved values
+      $this->_productID = $item["itemId"];
+      $this->_productName = $item["itemName"];
+      $this->_photo = $item["photo"];
+      $this->_originalPrice = $item["price"];
+      $this->_salePrice = isset($item["salePrice"]) ? (float) $item["salePrice"] : null;
+      $this->_description = $item["description"];
       
     } catch (PDOException $e) {
-      die("Query failed: " . $e->getMessage());
+      throw $e;
     }
   }
+
+  public function getProductData(): ?array
+  {
+
+    // check if a product has been loaded
+    if (!$this->_productID) {
+        return null;
+    }
+
+    // return product data for display
+    return [
+      'productID' => $this->_productID,
+      'productName' => $this->_productName,
+      'photo' => $this->_photo,
+      'originalPriceFormatted' => $this->getOriginalPriceFormatted(),
+      'salePriceFormatted' => $this->getSalePriceFormatted(),
+      'finalPriceFormatted' => $this->getFinalPriceFormatted(),
+      'description' => $this->_description,
+      'onSale' => $this->hasValidSalePrice(),
+    ];
+
+  }
+  
+  // private methods
+
+  private function hasValidSalePrice(): bool
+  {
+      return isset($this->_salePrice) && $this->_salePrice > 0;
+  }
+
 }

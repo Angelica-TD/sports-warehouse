@@ -2,12 +2,12 @@
 
   // Dependencies
   require_once "includes/common.php";
-  require_once "classes/ProductAccess.php";
+  require_once "classes/Product.php";
 
-  $productAccess = new ProductAccess($db);
+  $product = new Product($db);
 
   // Fetch featured products
-  $products = $productAccess->getFeaturedProducts();
+  $products = $product->getFeaturedProducts();
 
   // Config
   $title = "Home";

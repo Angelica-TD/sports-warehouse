@@ -2,10 +2,10 @@
 
   // Dependencies
   require_once "includes/common.php";
-  require_once "classes/ProductAccess.php";
+  require_once "classes/Product.php";
   require_once "includes/pagination.php";
 
-  $productAccess = new ProductAccess($db);
+  $product = new Product($db);
 
   // Fetch products by search term
 
@@ -20,7 +20,7 @@
   }
 
   // Fetch products and pagination info from ProductAccess
-  $result = $productAccess->getProductsBySearchTerm($searchTerm, $currentPage);
+  $result = $product->getProductsBySearchTerm($searchTerm, $currentPage);
 
   $products = $result['products'];
   $totalProducts = $result['totalProducts'];
