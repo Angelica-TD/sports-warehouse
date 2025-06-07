@@ -28,6 +28,13 @@
                     </h3>
                 </a>
 
+                <form action="products.php" method="post" class="add-to-cart-form">
+                    <input type="hidden" name="productId" value="<?= $product["itemId"] ?>">
+                    <input type="hidden" id="qty<?= $product["itemId"] ?>" name="quantity" value="1">
+                    <input type="hidden" name="returnUrl" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>">
+                    <button type="submit" class="add-to-cart-button" name="addToCart" value="addToCart">Add to Cart</button>
+                </form>
+
             </article>
         <?php endforeach ?>
     </div>

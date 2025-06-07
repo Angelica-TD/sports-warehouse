@@ -23,7 +23,7 @@
                     <ul class="horizontal-list">
                         <li><a class="login icon-large" href="#">Login</a></li>
                         <li><a class="view-cart icon-large" href="#">View Cart</a></li>
-                        <li><a class="items-in-cart orange-fill-hover" href="#">0 items</a></li>
+                        <li><a class="items-in-cart orange-fill-hover" href="#"><?=$itemCount?> items</a></li>
                     </ul>
                 </div>
 

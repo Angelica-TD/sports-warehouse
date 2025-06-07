@@ -170,6 +170,7 @@ class Product
    */
   public function loadSingleProductByID(int $itemId)
   {
+    $this->_db->connect();
     try {
       $sql = <<<SQL
                 SELECT	itemId, itemName, photo, price, salePrice, description
@@ -250,7 +251,7 @@ class Product
 
   private function getPaginatedProducts(?int $categoryId, int $currentPage, int $itemsPerPage): array
   {
-    $this->_db->connect();
+    // $this->_db->connect();
 
     $totalProducts = $this->countProducts($categoryId);
     $totalPages = max(1, ceil($totalProducts / $itemsPerPage));

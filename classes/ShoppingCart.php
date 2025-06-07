@@ -9,11 +9,11 @@ class ShoppingCart
 {
     private $_cartItems = [];
     private $_shoppingOrderId;
-    private DBAccess $_db;
+    // private DBAccess $_db;
 
-    public function __construct(DBAccess $db)
+    public function __construct()
     {
-        $this->_db = $db;
+        // $this->_db = $db;
     }
 
     public function count()
@@ -97,7 +97,7 @@ class ShoppingCart
 
 
     //save cart
-    public function saveCart($Address, $ContactNumber, $CreditCardNumber, $CSV, $Email,
+    public function saveCart(DBAccess $db, $Address, $ContactNumber, $CreditCardNumber, $CSV, $Email,
     $ExpiryDate, $FirstName, $LastName, $NameOnCard)
     {
 
@@ -107,7 +107,7 @@ class ShoppingCart
         Email, ExpiryDate, FirstName, LastName, NameOnCard, OrderDate) values(:Address, :ContactNumber, :CreditCardNumber, :CSV, :Email, :ExpiryDate, :FirstName, :LastName,
         :NameOnCard, curdate())";
 
-        $stmt = $this->_db->prepareStatement($sql);
+        $stmt = $db->prepareStatement($sql);
         $stmt->bindValue(":Address" , $Address, PDO::PARAM_STR);
         $stmt->bindValue(":ContactNumber" , $ContactNumber, PDO::PARAM_STR);
         $stmt->bindValue(":CreditCardNumber" , $CreditCardNumber, PDO::PARAM_STR);
@@ -117,7 +117,7 @@ class ShoppingCart
         $stmt->bindValue(":FirstName" , $FirstName, PDO::PARAM_STR);
         $stmt->bindValue(":LastName" , $LastName, PDO::PARAM_STR);
         $stmt->bindValue(":NameOnCard" , $NameOnCard, PDO::PARAM_STR);
-        $shoppingOrderID = $this->_db->executeNonQuery($stmt, true);
+        $shoppingOrderID = $db->executeNonQuery($stmt, true);
 
         //loop through shopping cart, insert items
         foreach ($this->_cartItems as $item)
@@ -127,12 +127,12 @@ class ShoppingCart
             values(:ItemID, :Price, :Quantity, :shoppingOrderID)";
 
             //for each item insert a row in OrderItem
-            $stmt = $this->_db->prepareStatement($sql);
+            $stmt = $db->prepareStatement($sql);
             $stmt->bindValue(":ItemID" , $item->getItemId(), PDO::PARAM_INT);
             $stmt->bindValue(":Price" , $item->getPrice(), PDO::PARAM_STR);
             $stmt->bindValue(":Quantity" , $item->getQuantity(), PDO::PARAM_INT);
             $stmt->bindValue(":shoppingOrderID" , $shoppingOrderID, PDO::PARAM_INT);
-            $this->_db->executeNonQuery($stmt);
+            $db->executeNonQuery($stmt);
         }
 
         return $shoppingOrderID;

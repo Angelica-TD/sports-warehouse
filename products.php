@@ -25,6 +25,11 @@
       //save shopping cart back into session
       $_SESSION["cart"] = $cart;
 
+      // echo "<pre>";
+      // print_r($_SESSION["cart"]);
+      // print_r($cart->count());
+      // echo "</pre>";
+
       // Get return URL or fallback
       $returnUrl = $_POST['returnUrl'] ?? 'products.php';
       $returnUrl = filter_var($returnUrl, FILTER_SANITIZE_URL);
@@ -33,7 +38,6 @@
 
     }
   }
-
     
   // Fetch products by category
   // Get categoryId and page from URL or default values

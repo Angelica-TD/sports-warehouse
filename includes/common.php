@@ -24,6 +24,7 @@
   require_once INCLUDES_DIR . "database.php";
 
   // Include ShoppingCart class which is used in every page
+  require_once CLASSES_DIR . "CartItem.php";
   require_once CLASSES_DIR . "ShoppingCart.php";
   require_once CLASSES_DIR . "Product.php";
 
@@ -35,7 +36,11 @@
     session_start();
   }
 
-  // Instantiate ShoppingCart
-  $cart = new ShoppingCart();
+  if (isset($_SESSION["cart"])) {
+    $cart = $_SESSION["cart"];
+  } else {
+    $cart = new ShoppingCart();
+    $_SESSION["cart"] = $cart;
+  }
 
-  $_SESSION['cart'] = $cart;
+  $itemCount = $cart->count();
