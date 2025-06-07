@@ -2,7 +2,7 @@
 
   // Dependencies
   require_once "includes/common.php";
-  require_once "classes/Product.php";
+  
 
   if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
       header("Location: index.php");

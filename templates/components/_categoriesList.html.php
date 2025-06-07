@@ -8,7 +8,7 @@
 <li>
     <a
      href="products.php?id=<?= $category["categoryId"] ?>"
-     <?= ($category['categoryId'] == $categoryId) ? "class='active'" : "" ?>>
+     <?= ($category['categoryId'] == $activeCategoryId) ? "class='active'" : "" ?>>
         <?= $category["categoryName"] ?>
     </a>
 </li>

@@ -7,6 +7,7 @@
   // SCRIPTS_DIR will point to the "sports-warehouse/assets/js" folder
   define("ROOT_DIR", __DIR__ . "/../");
   define("INCLUDES_DIR", ROOT_DIR . "includes/");
+  define("CLASSES_DIR", ROOT_DIR . "classes/");
   define("TEMPLATES_DIR", ROOT_DIR . "templates/");
   define("LAYOUT_TEMPLATES_DIR", ROOT_DIR . "templates/layouts/");
   define("PAGE_TEMPLATES_DIR", ROOT_DIR . "templates/pages/");
@@ -22,8 +23,19 @@
   // Database connection (create DBAccess instance in the $db variable)
   require_once INCLUDES_DIR . "database.php";
 
-  // Open the database connection
-  $db->connect();
-  
-  // This is used for the categories horizontal strip in every page
-  require_once INCLUDES_DIR . "categories.php";
+  // Include ShoppingCart class which is used in every page
+  require_once CLASSES_DIR . "ShoppingCart.php";
+  require_once CLASSES_DIR . "Product.php";
+
+  $product = new Product($db);
+  $categories = $product->getAllProductCategories();
+  $activeCategoryId = $product->getActiveProductCategory();
+
+  if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+  }
+
+  // Instantiate ShoppingCart
+  $cart = new ShoppingCart();
+
+  $_SESSION['cart'] = $cart;

@@ -11,11 +11,13 @@ class Product
   private $_photo;
   private $_description;
   private $_salePrice;
+  private $_activeProductCategory;
   private DBAccess $_db;
 
   public function __construct(DBAccess $db)
   {
     $this->_db = $db;
+    $this->_activeProductCategory = null;
   }
 
   // getters
@@ -58,6 +60,7 @@ class Product
    */
   public function getFeaturedProducts(): array
   {
+    $this->_db->connect();
     // Fetch featured products
     $sql = <<<SQL
     SELECT	itemId, itemName, photo, price, salePrice, description
@@ -85,47 +88,8 @@ class Product
    */
   public function getProductsByCategory(int $categoryId, int $currentPage = 1, int $itemsPerPage = 10): array
   {
-    // Count total products
-    $sql = <<<SQL
-        SELECT COUNT(*) AS total 
-        FROM item 
-        WHERE categoryId = :categoryId
-    SQL;
-
-    $stmt = $this->_db->prepareStatement($sql);
-    $stmt->bindValue(":categoryId", $categoryId, PDO::PARAM_INT);
-    $totalProducts = $this->_db->executeSQLReturnOneValue($stmt);
-
-    // Calculate total pages
-    $totalPages = ($totalProducts > 0) ? ceil($totalProducts / $itemsPerPage) : 1;
-
-    // Clamp currentPage to valid range
-    $currentPage = max(1, min($currentPage, $totalPages));
-
-    // Calculate offset
-    $offset = ($currentPage - 1) * $itemsPerPage;
-
-    // Fetch paginated products
-    $sql = <<<SQL
-        SELECT itemId, itemName, photo, price, salePrice, description
-        FROM item
-        WHERE categoryId = :categoryId
-        LIMIT :limit OFFSET :offset
-    SQL;
-
-    $stmt = $this->_db->prepareStatement($sql);
-    $stmt->bindValue(":categoryId", $categoryId, PDO::PARAM_INT);
-    $stmt->bindValue(":limit", $itemsPerPage, PDO::PARAM_INT);
-    $stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
-
-    $products = $this->_db->executeSQL($stmt);
-
-    return [
-      'products' => $products,
-      'totalProducts' => $totalProducts,
-      'totalPages' => $totalPages,
-      'currentPage' => $currentPage
-    ];
+    $this->_activeProductCategory = $categoryId;
+    return $this->getPaginatedProducts($categoryId, $currentPage, $itemsPerPage);
   }
 
   /**
@@ -251,12 +215,106 @@ class Product
     ];
 
   }
+
+  public function getAllProducts(int $currentPage = 1, int $itemsPerPage = 10): array
+  {
+    return $this->getPaginatedProducts(null, $currentPage, $itemsPerPage);
+  }
+
+  public function getAllProductCategories()
+  {
+    $this->_db->connect();
+      // Define
+    $sql = <<<SQL
+    SELECT	categoryId, categoryName
+    FROM	  category
+    SQL;
+
+    // Prepare the statement
+    $stmt = $this->_db->prepareStatement($sql);
+
+    // Execute query (get the featured products)
+    return $this->_db->executeSQL($stmt);
+    // $categoryId = null;
+
+  }
+
+  public function getActiveProductCategory() : ?int { return $this->_activeProductCategory; }
   
   // private methods
 
   private function hasValidSalePrice(): bool
   {
       return isset($this->_salePrice) && $this->_salePrice > 0;
+  }
+
+  private function getPaginatedProducts(?int $categoryId, int $currentPage, int $itemsPerPage): array
+  {
+    $this->_db->connect();
+
+    $totalProducts = $this->countProducts($categoryId);
+    $totalPages = max(1, ceil($totalProducts / $itemsPerPage));
+    $currentPage = max(1, min($currentPage, $totalPages));
+    $offset = ($currentPage - 1) * $itemsPerPage;
+
+    $sql = <<<SQL
+        SELECT itemId, itemName, photo, price, salePrice, description
+        FROM item
+        SQL;
+
+    if ($categoryId) {
+        $sql .= " WHERE categoryId = :categoryId";
+    }
+
+    $sql .= " LIMIT :limit OFFSET :offset";
+
+    $stmt = $this->_db->prepareStatement($sql);
+
+    if ($categoryId) {
+        $stmt->bindValue(":categoryId", $categoryId, PDO::PARAM_INT);
+    }
+
+    $stmt->bindValue(":limit", $itemsPerPage, PDO::PARAM_INT);
+    $stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
+
+    $products = $this->_db->executeSQL($stmt);
+
+    return [
+        'products' => $products,
+        'totalProducts' => $totalProducts,
+        'totalPages' => $totalPages,
+        'currentPage' => $currentPage
+    ];
+
+  }
+
+  private function countProducts(?int $categoryId = null): int
+  {
+
+    if ($categoryId) {
+
+      $sql = <<<SQL
+          SELECT COUNT(*) AS total 
+          FROM item 
+          WHERE categoryId = :categoryId
+      SQL;
+
+      $stmt = $this->_db->prepareStatement($sql);
+      $stmt->bindValue(":categoryId", $categoryId, PDO::PARAM_INT);
+    
+    } else {
+
+      $sql = <<<SQL
+          SELECT COUNT(*) AS total 
+          FROM item
+      SQL;
+
+      $stmt = $this->_db->prepareStatement($sql);
+    
+    }
+
+    return $this->_db->executeSQLReturnOneValue($stmt);
+
   }
 
 }
