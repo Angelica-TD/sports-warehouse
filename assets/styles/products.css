@@ -142,3 +142,12 @@
     background-color: #002936;
     color: #fff;
 }
+
+/* CART PAGE */
+.cart-page{
+    grid-template-columns: 1fr;
+}
+
+.cart-page .product--list{
+    
+}

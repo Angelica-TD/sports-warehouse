@@ -130,6 +130,16 @@ footer nav{
   background-color: var(--dark-blue);
 }
 
+.strip--bglightblue{
+  background-color: var(--light-blue);
+}
+
+.strip--with-icon{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .overlay__title{
   font-weight: 300;
   display: flex;
@@ -296,6 +306,7 @@ footer nav{
 }
 
 .view-cart::before{
+  font: var(--fa-font-solid);
   content: '\f07a';
 }
 

@@ -3,7 +3,7 @@
   <div class="banner__overlay">
     <div class="banner__copy">
       <h2 class="overlay__title">View our brand new range of <span>Sports balls</span></h2>
-      <a role="button" href="#" class="banner__button orange-fill-hover">Shop now</a>
+      <a role="button" href="products.php?id=5" class="banner__button orange-fill-hover">Shop now</a>
     </div>
   </div>
 </section>

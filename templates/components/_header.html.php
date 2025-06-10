@@ -15,15 +15,15 @@
                         <li><a href="index.php">Home</a></li>
                         <li><a href="#">About SW</a></li>
                         <li><a href="contact-us.php">Contact Us</a></li>
-                        <li><a href="#">View Products</a></li>
+                        <li><a href="products.php">View Products</a></li>
                     </ul>
                 </nav>
 
                 <div class="account-actions">
                     <ul class="horizontal-list">
                         <li><a class="login icon-large" href="#">Login</a></li>
-                        <li><a class="view-cart icon-large" href="#">View Cart</a></li>
-                        <li><a class="items-in-cart orange-fill-hover" href="#"><?=$itemCount?> items</a></li>
+                        <li><a class="view-cart icon-large" href="view-cart.php">View Cart</a></li>
+                        <li><a class="items-in-cart orange-fill-hover" href="view-cart.php"><?=$itemCount?> items</a></li>
                     </ul>
                 </div>
 

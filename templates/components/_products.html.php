@@ -2,7 +2,7 @@
     <p>No products.</p>
 <?php else: ?>
 
-    <div class="products-container mobile-padding">
+    <div class="products-container <?=$cartClass ? $cartClass : ''?> mobile-padding">
         <?php foreach ($products as $product): ?>
             <?php
                 $isOnSale = isset($product["salePrice"]) && $product["salePrice"] > 0;
@@ -12,7 +12,7 @@
             ?>
             <article class="product product--list">
                 <a href="product.php?id=<?= $product["itemId"] ?>">
-                    <img class="product__image" src="./assets/images/products/<?= $product["photo"] ?>" alt="<?= htmlspecialchars($product["description"]) ?>">
+                    <img class="product__image" src="./assets/images/products/<?= $product["photo"] ?>" alt="">
                 </a>
                 
                 <div class="product__price <?= $isOnSale ? 'product__price--sale' : '' ?>">
