@@ -5,6 +5,7 @@
 
   $products = $cart->getItemsForDisplay($db);
   $cartClass = "cart-page";
+  $displayType = "in-cart";
 
   // Config
   $title = "Your Cart";

@@ -44,3 +44,5 @@
   }
 
   $itemCount = $cart->count();
+  $displayType = "list";
+  $cartClass = "";
