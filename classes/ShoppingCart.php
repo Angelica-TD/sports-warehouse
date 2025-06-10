@@ -139,6 +139,28 @@ class ShoppingCart
     
     }
 
+    public function getItemsForDisplay(DBAccess $db)
+    {
+        $displayItems = [];
+
+        foreach ($this->_cartItems as $item) {
+            
+            $product = new Product($db);
+            $product->loadSingleProductByID($item->getItemId());
+
+            $displayItems[] = [
+                "itemId" => $item->getItemId(),
+                "itemName" => $item->getItemName(),
+                "price" => $item->getPrice(),
+                "quantity" => $item->getQuantity(),
+                "salePrice" => $product->getSalePrice(),
+                "photo" => $product->getPhoto()
+            ];
+        }
+
+        return $displayItems;
+    }
+
 
     private function inCart($cartItem)
     {
