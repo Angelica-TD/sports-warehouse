@@ -22,6 +22,10 @@
     "products.css"
   ];
 
+  $scripts = [
+    "spinner.js"
+  ];
+
   ob_start();
 
   // Include the page-specific template
