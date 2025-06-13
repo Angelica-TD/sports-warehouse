@@ -52,7 +52,8 @@ class ShoppingCart
     //add quantity
     public function updateItem($cartItem)
     {
-        $index = $this->itemIndex($cartItem);
+        $productId = $cartItem->getItemId();
+        $index = $this->itemIndex($productId);
         
         //get current quantity
         $oldQty = $this->_cartItems[$index]->getQuantity();
@@ -68,19 +69,20 @@ class ShoppingCart
     }
 
     //update quantity
-    public function updateQuantity($cartItem)
+    public function updateQuantity($productId, $quantity)
     {
-        $index = $this->itemIndex($cartItem);
+        $index = $this->itemIndex($productId);
         
-        //update cart item with new quatity
-        $this->_cartItems[$index]->setQuantity($cartItem->getQuantity());
+        //update cart item with new quantity
+        $this->_cartItems[$index]->setQuantity($quantity);
 
     }
 
     //remove item
     public function removeItem($cartItem)
     {
-        $index = $this->itemIndex($cartItem);
+        $productId = $cartItem->getItemId();
+        $index = $this->itemIndex($productId);
 
         if($index >= 0)
         {
@@ -164,12 +166,24 @@ class ShoppingCart
                 "price" => $product->getOriginalPrice(),
                 "quantity" => $item->getQuantity(),
                 "salePrice" => $product->getSalePrice(),
-                "photo" => $product->getPhoto()
+                "photo" => $product->getPhoto(),
+                "inCart" => true
             ];
         }
 
         return $displayItems;
     }
+
+    public function getQuantityForProductId(int $productId): int
+    {
+        foreach ($this->_cartItems as $item) {
+            if ($item->getItemId() === $productId) {
+                return $item->getQuantity();
+            }
+        }
+        return 0;
+    }
+
 
 
     private function inCart($cartItem)
@@ -186,12 +200,12 @@ class ShoppingCart
     }
 
 
-    private function itemIndex($cartItem)
+    private function itemIndex($productId)
     {
         $index = -1;
         for($i=0; $i<$this->count(); $i++)
         {
-            if($cartItem->getItemId() == $this->_cartItems[$i]->getItemId())
+            if($productId == $this->_cartItems[$i]->getItemId())
             {
                 $index = $i;
             }

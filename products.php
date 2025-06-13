@@ -17,15 +17,17 @@
       $product->loadSingleProductByID($productId);
       
       // create a new cart item
-      $cartProduct = new CartItem($product->getProductName(), $quantity, $product->getFinalPrice(), $productId);
+      $cartProduct = new CartItem($product->getProductName(), $product->getFinalPrice(), $productId, $quantity);
       
       if($_POST["cartAction"] === "addToCart"){
 
         // add it to shopping cart or update quantity
         $cart->addItem($cartProduct);
 
-      }elseif($_POST["cartAction"] === "updateItemInCart"){ 
-        $cart->updateQuantity($cartProduct);
+      }elseif($_POST["cartAction"] === "updateItemInCart"){
+        // echo $productId;
+        // echo $quantity;
+        $cart->updateQuantity($productId, $quantity);
       }
       else {
 
@@ -56,10 +58,10 @@
   $currentPage = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
 
   if ($categoryId){
-    $result = $product->getProductsByCategory($categoryId, $currentPage);
+    $result = $product->getProductsByCategory($categoryId, $cart, $currentPage);
     $categoryName = $product->getCategoryName($categoryId);
   } else {
-    $result = $product->getAllProducts();
+    $result = $product->getAllProducts($cart);
     $categoryName = "All Products";
   }
 
@@ -79,6 +81,10 @@
   $title = "Shop $categoryName";
   $styles = [
     "products.css"
+  ];
+
+  $scripts = [
+    "spinner.js"
   ];
 
   ob_start();

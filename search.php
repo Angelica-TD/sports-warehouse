@@ -19,7 +19,7 @@
   }
 
   // Fetch products and pagination info from ProductAccess
-  $result = $product->getProductsBySearchTerm($searchTerm, $currentPage);
+  $result = $product->getProductsBySearchTerm($searchTerm, $cart, $currentPage);
 
   $products = $result['products'];
   $totalProducts = $result['totalProducts'];
@@ -30,6 +30,10 @@
   $title = "Search results for $searchTerm";
   $styles = [
     "products.css"
+  ];
+
+  $scripts = [
+    "spinner.js"
   ];
 
   ob_start();

@@ -9,7 +9,7 @@ class CartItem
     private $_price;
     private $_productID;
     
-    public function __construct($itemName, $quantity, $price, $productID)
+    public function __construct($itemName, $price, $productID, $quantity = 1)
     {
         $this->_itemName = $itemName;
         $this->_quantity = (int)$quantity;
@@ -28,14 +28,12 @@ class CartItem
 
     public function setQuantity(int $value)
     {
-        if ($value >= 0) {
-            if($this->_quantity < 10){
-                $this->_quantity = (int)$value;
-            }
-        } else {
-            throw new Exception("Quantity must be positive");
+        if ($value < 1 || $value > 10) {
+            throw new Exception("Quantity must be between 1 and 10");
         }
-    }
+
+        $this->_quantity = $value;
+        }
 
 
 }

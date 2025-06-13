@@ -14,6 +14,9 @@
     border-radius: 5px;
     border: 1px solid var(--light-grey);
     text-align: center;
+    display: grid;
+    grid-row: span 4;
+    grid-template-rows: subgrid;
     transition: box-shadow .2s ease-in-out;
 }
 
@@ -151,10 +154,13 @@
 
 .product--in-cart{
     align-items: center;
-    padding-block: 3rem;
-    grid-template-columns: 1fr 3fr 1fr;
-    max-width: 80%;
-    margin: auto;
+    margin-top: 3rem;
+    padding-bottom: 3rem;
+    grid-template-columns: 1fr 3fr;
+    position: relative;
+    width: 80%;
+    margin-inline: auto;
+    column-gap: 50px;
 }
 
 .product--in-cart:not(:last-of-type){
@@ -162,7 +168,8 @@
 }
 
 .product--in-cart a:has(.product__image){
-    grid-row: 1 / span 2;
+    grid-row: 1 / span 3;
+    text-align: center;
 }
 
 .product--in-cart .product__price,
@@ -178,4 +185,33 @@
 
 .product--in-cart a:has(.product__name){
     grid-row: 1/2;
+}
+
+.product--in-cart .modify-quantity{
+    flex-direction: row;
+    justify-content: start;
+}
+
+@media screen and (min-width: 992px){
+    .product--in-cart{
+        width: 55%;
+    }
+}
+
+.product--in-cart button.update-quantity{
+    width: auto;
+}
+
+button.remove-product{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto;
+    background-color: unset;
+    color: var(--orange);
+    font-size: 2rem;
+}
+
+button.remove-product:hover{
+    background-color: unset;
 }

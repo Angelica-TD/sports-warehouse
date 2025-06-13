@@ -4,7 +4,7 @@
   require_once "includes/common.php";
 
   // Fetch featured products
-  $products = $product->getFeaturedProducts();
+  $products = $product->getFeaturedProducts($cart);
 
   // Config
   $title = "Home";
@@ -14,7 +14,8 @@
   ];
 
   $scripts = [
-    "subscribe.js"
+    "subscribe.js",
+    "spinner.js"
   ];
 
   ob_start();

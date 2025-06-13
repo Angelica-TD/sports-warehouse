@@ -59,7 +59,7 @@ class Product
    * @return array featured products
    * }
    */
-  public function getFeaturedProducts(): array
+  public function getFeaturedProducts(ShoppingCart $cart): array
   {
     $this->_db->connect();
     // Fetch featured products
@@ -71,7 +71,18 @@ class Product
 
     // Prepare the statement
     $stmt = $this->_db->prepareStatement($sql);
-    return $this->_db->executeSQL($stmt);
+    $products = $this->_db->executeSQL($stmt);
+
+    // Attach cart quantity to each featured product
+    foreach ($products as &$product) {
+        $productId = $product['itemId'];
+        $quantity = $cart->getQuantityForProductId($productId);
+        $product['quantity'] = $quantity;
+        $product["inCart"] = $quantity > 0 ? true : false;
+    }
+    unset($product);
+
+    return $products;
   }
 
   /**
@@ -87,10 +98,10 @@ class Product
    *     currentPage: int
    * }
    */
-  public function getProductsByCategory(int $categoryId, int $currentPage = 1, int $itemsPerPage = 10): array
+  public function getProductsByCategory(int $categoryId, ShoppingCart $cart, int $currentPage = 1, int $itemsPerPage = 10): array
   {
     $this->_activeProductCategory = $categoryId;
-    return $this->getPaginatedProducts($categoryId, $currentPage, $itemsPerPage);
+    return $this->getPaginatedProducts($categoryId, null, $cart, $currentPage, $itemsPerPage);
   }
 
   /**
@@ -121,46 +132,9 @@ class Product
    * @param int $itemsPerPage
    * @return array Resultset data (rows)
    */
-  public function getProductsBySearchTerm(string $searchTerm, int $currentPage = 1, int $itemsPerPage = 10): array
+  public function getProductsBySearchTerm(string $searchTerm, ShoppingCart $cart, int $currentPage = 1, int $itemsPerPage = 10): array
   {
-    // Count total products
-    $sql = <<<SQL
-          SELECT COUNT(*) AS total
-          FROM item
-          WHERE itemName LIKE :searchTerm
-          OR description LIKE :searchTerm
-      SQL;
-
-    $stmt = $this->_db->prepareStatement($sql);
-    $stmt->bindValue(":searchTerm", "%{$searchTerm}%", PDO::PARAM_STR);
-    $totalProducts = $this->_db->executeSQLReturnOneValue($stmt);
-
-    // Calculate total pages
-    $totalPages = ($totalProducts > 0) ? ceil($totalProducts / $itemsPerPage) : 1;
-    $currentPage = max(1, min($currentPage, $totalPages));
-    $offset = ($currentPage - 1) * $itemsPerPage;
-
-    // Fetch paginated results
-    $sql = <<<SQL
-          SELECT itemId, itemName, photo, price, salePrice, description
-          FROM item
-          WHERE itemName LIKE :searchTerm
-          OR description LIKE :searchTerm
-          LIMIT :limit OFFSET :offset
-      SQL;
-
-    $stmt = $this->_db->prepareStatement($sql);
-    $stmt->bindValue(":searchTerm", "%{$searchTerm}%", PDO::PARAM_STR);
-    $stmt->bindValue(":limit", $itemsPerPage, PDO::PARAM_INT);
-    $stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
-    $products = $this->_db->executeSQL($stmt);
-
-    return [
-      'products' => $products,
-      'totalProducts' => $totalProducts,
-      'totalPages' => $totalPages,
-      'currentPage' => $currentPage
-    ];
+    return $this->getPaginatedProducts(null, $searchTerm, $cart, $currentPage, $itemsPerPage);
   }
 
   /**
@@ -218,9 +192,9 @@ class Product
 
   }
 
-  public function getAllProducts(int $currentPage = 1, int $itemsPerPage = 10): array
+  public function getAllProducts(ShoppingCart $cart, int $currentPage = 1, int $itemsPerPage = 10): array
   {
-    return $this->getPaginatedProducts(null, $currentPage, $itemsPerPage);
+    return $this->getPaginatedProducts(null, null, $cart, $currentPage, $itemsPerPage);
   }
 
   public function getAllProductCategories()
@@ -250,7 +224,7 @@ class Product
       return isset($this->_salePrice) && $this->_salePrice > 0;
   }
 
-  private function getPaginatedProducts(?int $categoryId, int $currentPage, int $itemsPerPage): array
+  private function getPaginatedProducts(?int $categoryId, ?string $searchTerm, ShoppingCart $cart, int $currentPage, int $itemsPerPage): array
   {
     // $this->_db->connect();
 
@@ -266,6 +240,9 @@ class Product
 
     if ($categoryId) {
         $sql .= " WHERE categoryId = :categoryId";
+    } elseif ($searchTerm) {
+        $sql .= " WHERE itemName LIKE :searchTerm";
+        $sql .= " OR description LIKE :searchTerm";
     }
 
     $sql .= " LIMIT :limit OFFSET :offset";
@@ -273,7 +250,9 @@ class Product
     $stmt = $this->_db->prepareStatement($sql);
 
     if ($categoryId) {
-        $stmt->bindValue(":categoryId", $categoryId, PDO::PARAM_INT);
+      $stmt->bindValue(":categoryId", $categoryId, PDO::PARAM_INT);
+    } elseif ($searchTerm) {
+      $stmt->bindValue(":searchTerm", "%{$searchTerm}%", PDO::PARAM_STR);
     }
 
     $stmt->bindValue(":limit", $itemsPerPage, PDO::PARAM_INT);
@@ -281,16 +260,28 @@ class Product
 
     $products = $this->_db->executeSQL($stmt);
 
+    // Attach quantity from cart
+    if ($cart) {
+      foreach ($products as &$product) {
+        $productId = $product['itemId'];
+        $quantity = $cart->getQuantityForProductId($productId);
+        $product['quantity'] = $quantity;
+        $product["inCart"] = $quantity > 0 ? true : false;
+      }
+    }
+
+    unset($product);
+
     return [
-        'products' => $products,
-        'totalProducts' => $totalProducts,
-        'totalPages' => $totalPages,
-        'currentPage' => $currentPage
+      'products' => $products,
+      'totalProducts' => $totalProducts,
+      'totalPages' => $totalPages,
+      'currentPage' => $currentPage
     ];
 
   }
 
-  private function countProducts(?int $categoryId = null): int
+  private function countProducts(?int $categoryId = null, ?string $searchTerm = null): int
   {
 
     if ($categoryId) {
@@ -304,6 +295,18 @@ class Product
       $stmt = $this->_db->prepareStatement($sql);
       $stmt->bindValue(":categoryId", $categoryId, PDO::PARAM_INT);
     
+    } elseif($searchTerm) {
+
+      $sql = <<<SQL
+          SELECT COUNT(*) AS total 
+          FROM item 
+          WHERE itemName LIKE :searchTerm
+          OR description LIKE :searchTerm
+      SQL;
+
+      $stmt = $this->_db->prepareStatement($sql);
+      $stmt->bindValue(":searchTerm", "%{$searchTerm}%", PDO::PARAM_STR);
+    
     } else {
 
       $sql = <<<SQL
@@ -312,7 +315,7 @@ class Product
       SQL;
 
       $stmt = $this->_db->prepareStatement($sql);
-    
+
     }
 
     return $this->_db->executeSQLReturnOneValue($stmt);

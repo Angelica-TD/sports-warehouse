@@ -731,3 +731,95 @@ main p:not(:last-of-type){
       padding-inline: 15px;
   }
 }
+
+.modify-quantity{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.num-in{
+  display: flex;
+  gap: 5px;
+}
+
+.num-in span {
+	display: block;
+	width: 25px;
+	height: 34px;
+	position: relative;
+	cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.num-in span.minus:before {
+	content: '–';
+}
+
+.num-in .in-num {
+  max-width: 95px;
+	text-align: center;
+	font-size: 14px;
+  user-select: none;
+}
+
+.minus, .plus, .in-num{
+  border: 1px solid #CCCCCC;
+  border-radius: 2px;
+}
+
+.num-in span.plus:before {
+	content: '+';
+}
+
+.plus:hover{
+  background-color: var(--mid-blue);
+  border-color: var(--mid-blue);
+  color: #fff;
+}
+
+.minus:hover{
+  background-color: #ffbb8e;
+  border-color: #ffbb8e;
+  /* color: #fff; */
+}
+
+button[name="cartAction"]{
+    color: var(--white);
+    border-radius: 5px;
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.add-to-cart{
+    background-color: var(--mid-blue);
+}
+
+.add-to-cart::before{
+  content: "\F244";
+}
+
+.update-quantity{
+    background-color: var(--light-blue);
+}
+
+/* .update-quantity::before{
+  content: "\F130";
+} */
+
+button[name="cartAction"]:hover{
+  background-color: var(--dark-blue);
+}
+
+*:hover{
+  transition: all ease-in 100ms;
+}
+
+.pseudo-icon::before,
+.pseudo-icon::after{
+  font-family: 'bootstrap-icons';
+}
