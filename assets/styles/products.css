@@ -166,14 +166,15 @@
 }
 
 .product--in-cart .product__price,
-.product--in-cart a:has(.product__name){
+.product--in-cart a:has(.product__name),
+.cart-page .modify-quantity{
     grid-column: 2/3;
 }
 
-.modify-quantity{
+/* .modify-quantity{
     grid-column: 3/4;
     grid-row: 1 / 2;
-}
+} */
 
 .product--in-cart a:has(.product__name){
     grid-row: 1/2;

@@ -28,31 +28,27 @@
                     </h3>
                 </a>            
 
-                <form action="products.php" method="post" class="">
-                    <?php if ($cartClass === "cart-page"): ?>
+                <form action="products.php" method="post" class="modify-quantity">
 
-                        <div class="modify-quantity">
-                            <p>
-                                Quantity
-                            </p>
+                        <p>
+                            Quantity
+                        </p>
 
-                            <label class="sr-only" for="qty<?= $product["itemId"] ?>">Quantity:</label>
-                            <input class="quantity" type="number" id="qty<?= $product["itemId"] ?>" name="quantity" value="<?= $product["quantity"] ?>" min="1" max="10">
+                        <label class="sr-only" for="qty<?= $product["itemId"] ?>">Quantity:</label>
+                        <input class="quantity" type="number" id="qty<?= $product["itemId"] ?>" name="quantity" value="<?= isset($product["quantity"])? $product["quantity"] : 1 ?>" min="1" max="10">
 
-                            <button type="submit" class="update-quantity" name="updateQuantity" value="updateQuantity">Update</button>
+                        <input type="hidden" name="productId" value="<?= $product["itemId"] ?>">
+                        <input type="hidden" name="returnUrl" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>">
 
-                        </div>
+                        <button type="submit" class="update-quantity" name="cartAction" value="addToCart">
+                            <?=$cartClass=== "cart-page" ? "Update" : "Add to cart" ?>
+                        </button>
 
+                        <?php if ($cartClass === "cart-page"): ?>
+                        <button type="submit" class="remove-product" name="cartAction" value="removeProduct">Remove</button>
+                        <?php endif ?>
 
-
-                    <?php else: ?>
-
-                        <button type="submit" class="add-to-cart-button" name="addToCart" value="addToCart">Add to Cart</button>
-
-                    <?php endif ?>
                 </form>
-
-
 
 
             </article>

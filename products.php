@@ -5,7 +5,7 @@
   require_once "includes/pagination.php";
 
   // add to cart
-  if(isset($_POST["addToCart"]))
+  if(isset($_POST["cartAction"]))
   {
     
     //check product id and qty are not empty
@@ -15,12 +15,20 @@
 
       // load product from DB
       $product->loadSingleProductByID($productId);
-
+      
       // create a new cart item
       $cartProduct = new CartItem($product->getProductName(), $quantity, $product->getFinalPrice(), $productId);
+      
+      if($_POST["cartAction"] === "addToCart"){
 
-      // add it to shopping cart
-      $cart->addItem($cartProduct);
+        // add it to shopping cart or update quantity
+        $cart->addItem($cartProduct);
+
+      } else {
+
+        $cart->removeItem($cartProduct);
+      
+      }      
 
       //save shopping cart back into session
       $_SESSION["cart"] = $cart;
