@@ -24,7 +24,10 @@
         // add it to shopping cart or update quantity
         $cart->addItem($cartProduct);
 
-      } else {
+      }elseif($_POST["cartAction"] === "updateItemInCart"){ 
+        $cart->updateQuantity($cartProduct);
+      }
+      else {
 
         $cart->removeItem($cartProduct);
       

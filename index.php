@@ -2,9 +2,6 @@
 
   // Dependencies
   require_once "includes/common.php";
-  
-
-  $product = new Product($db);
 
   // Fetch featured products
   $products = $product->getFeaturedProducts();

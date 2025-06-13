@@ -49,7 +49,7 @@ class ShoppingCart
     }
 
 
-    //update quantity
+    //add quantity
     public function updateItem($cartItem)
     {
         $index = $this->itemIndex($cartItem);
@@ -64,6 +64,16 @@ class ShoppingCart
         
         //update cart item with new quatity
         $this->_cartItems[$index]->setQuantity($newQty);
+
+    }
+
+    //update quantity
+    public function updateQuantity($cartItem)
+    {
+        $index = $this->itemIndex($cartItem);
+        
+        //update cart item with new quatity
+        $this->_cartItems[$index]->setQuantity($cartItem->getQuantity());
 
     }
 
@@ -151,7 +161,7 @@ class ShoppingCart
             $displayItems[] = [
                 "itemId" => $item->getItemId(),
                 "itemName" => $item->getItemName(),
-                "price" => $item->getPrice(),
+                "price" => $product->getOriginalPrice(),
                 "quantity" => $item->getQuantity(),
                 "salePrice" => $product->getSalePrice(),
                 "photo" => $product->getPhoto()

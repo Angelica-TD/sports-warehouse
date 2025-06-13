@@ -26,7 +26,7 @@ class Product
   public function getProductName(): string { return $this->_productName; }
   public function getPhoto(): string { return $this->_photo; }
   public function getOriginalPrice(): float { return $this->_originalPrice; }
-  public function getSalePrice(): float { return $this->_salePrice; }
+  public function getSalePrice(): ?float { return $this->_salePrice; }
   
   public function getFinalPrice(): float 
   { 

@@ -40,7 +40,7 @@
                         <input type="hidden" name="productId" value="<?= $product["itemId"] ?>">
                         <input type="hidden" name="returnUrl" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>">
 
-                        <button type="submit" class="update-quantity" name="cartAction" value="addToCart">
+                        <button type="submit" class="update-quantity" name="cartAction" value="<?=$cartClass=== "cart-page" ? "updateItemInCart" : "addToCart" ?>">
                             <?=$cartClass=== "cart-page" ? "Update" : "Add to cart" ?>
                         </button>
 

@@ -29,7 +29,9 @@ class CartItem
     public function setQuantity(int $value)
     {
         if ($value >= 0) {
-            $this->_quantity = (int)$value;
+            if($this->_quantity < 10){
+                $this->_quantity = (int)$value;
+            }
         } else {
             throw new Exception("Quantity must be positive");
         }
