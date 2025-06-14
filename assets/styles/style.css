@@ -789,10 +789,14 @@ main p:not(:last-of-type){
 }
 
 button[name="cartAction"]{
-    color: var(--white);
-    border-radius: 5px;
-    padding: 10px 20px;
-    width: 100%;
+  color: var(--white);
+  border-radius: 5px;
+  padding: 10px 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
 .add-to-cart{

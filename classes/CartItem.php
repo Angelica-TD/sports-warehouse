@@ -9,7 +9,7 @@ class CartItem
     private $_price;
     private $_productID;
     
-    public function __construct($itemName, $price, $productID, $quantity = 1)
+    public function __construct($itemName, $price, $productID, $quantity)
     {
         $this->_itemName = $itemName;
         $this->_quantity = (int)$quantity;
@@ -33,7 +33,7 @@ class CartItem
         }
 
         $this->_quantity = $value;
-        }
+    }
 
 
 }

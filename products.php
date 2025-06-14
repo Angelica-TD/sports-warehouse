@@ -9,7 +9,7 @@
   {
     
     //check product id and qty are not empty
-    if(!empty($_POST["productId"]) && !empty($_POST["quantity"])){
+    if(!empty($_POST["productId"]) && isset($_POST["quantity"])){
       $productId = $_POST["productId"];
       $quantity = $_POST["quantity"];
 
@@ -24,10 +24,9 @@
         // add it to shopping cart or update quantity
         $cart->addItem($cartProduct);
 
-      }elseif($_POST["cartAction"] === "updateItemInCart"){
-        // echo $productId;
-        // echo $quantity;
-        $cart->updateQuantity($productId, $quantity);
+      }elseif($_POST["cartAction"] === "updateItemInCart"){ 
+        echo $quantity;
+        $cart->updateQuantity($cartProduct, $quantity);
       }
       else {
 

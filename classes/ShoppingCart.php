@@ -53,7 +53,7 @@ class ShoppingCart
     public function updateItem($cartItem)
     {
         $productId = $cartItem->getItemId();
-        $index = $this->itemIndex($productId);
+        $index = $this->itemIndex($cartItem);
         
         //get current quantity
         $oldQty = $this->_cartItems[$index]->getQuantity();
@@ -69,20 +69,24 @@ class ShoppingCart
     }
 
     //update quantity
-    public function updateQuantity($productId, $quantity)
+    public function updateQuantity($cartItem, $quantity)
     {
-        $index = $this->itemIndex($productId);
+        $index = $this->itemIndex($cartItem);
         
-        //update cart item with new quantity
-        $this->_cartItems[$index]->setQuantity($quantity);
+        if ($index >= 0) {
+            if ($quantity <= 0) {
+                $this->removeItem($cartItem);
+            } else {
+                $this->_cartItems[$index]->setQuantity($quantity);
+            }
+        }
 
     }
 
     //remove item
     public function removeItem($cartItem)
     {
-        $productId = $cartItem->getItemId();
-        $index = $this->itemIndex($productId);
+        $index = $this->itemIndex($cartItem);
 
         if($index >= 0)
         {
@@ -200,17 +204,14 @@ class ShoppingCart
     }
 
 
-    private function itemIndex($productId)
+    private function itemIndex($cartItem)
     {
-        $index = -1;
-        for($i=0; $i<$this->count(); $i++)
-        {
-            if($productId == $this->_cartItems[$i]->getItemId())
-            {
-                $index = $i;
+        foreach ($this->_cartItems as $index => $item) {
+            if ($item->getItemId() === $cartItem->getItemId()) {
+                return $index;
             }
         }
-        return $index;
+        return -1;
     }
 
 

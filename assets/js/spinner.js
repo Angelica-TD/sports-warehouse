@@ -4,7 +4,7 @@ $(document).ready(function () {
         const $input = $container.find('input.in-num');
         const $minusBtn = $container.find('.minus');
         const $plusBtn = $container.find('.plus');
-        const min = parseInt($input.attr('min')) || 1;
+        const min = parseInt($input.attr('min')) || 0;
         const max = parseInt($input.attr('max')) || 10;
 
         // Initialize button state
