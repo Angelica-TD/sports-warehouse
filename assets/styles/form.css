@@ -2,7 +2,7 @@
 
 /* Form */
 
-#contactForm {
+.form {
     flex-grow: 1;
     width: 100%;
     display: flex;
@@ -17,19 +17,28 @@
     }
 }
 
-#contactForm input,
-#contactForm textarea {
+.form input,
+.form textarea,
+.form select {
     padding: 10px;
     width: 100%;
     border-radius: 20px;
     border: 1px solid var(--grey);
 }
 
+.form--checkout input,
+.form--checkout textarea,
+.form--checkout select{
+    border-radius: 4px;
+    border: 1px solid var(--light-grey);
+    padding-top: 15px;
+}
+
 .input-container {
     position: relative;
 }
 
-/* .input-container>label:not(.error),
+.input-container>label:not(.error),
 .input-single>label:not(.error) {
     position: absolute;
     top: 0;
@@ -37,7 +46,7 @@
     z-index: 2;
     color: rgb(128 127 127);
     height: 100%;
-    padding: 10px 15px;
+    padding: 15px;
     overflow: hidden;
     text-align: start;
     text-overflow: ellipsis;
@@ -45,13 +54,13 @@
     pointer-events: none;
     transform-origin: 0 0;
     transition: opacity .1s ease-in-out, transform .2s ease-in-out;
-} */
+}
 
-/* .floating:focus~label:not(.error),
+.floating:focus~label:not(.error),
 .floating:not(:placeholder-shown)~label:not(.error) {
     color: rgb(166, 166, 166);
     transform: scale(.65) translateY(-.5rem);
-} */
+}
 
 .input-group {
     display: flex;
@@ -67,16 +76,17 @@
     transition: background-color ease .2s;
 }
 
-#contactForm button[type="submit"] img {
+.form button[type="submit"] img {
     max-width: 25px;
 }
 
+.form button[type="submit"]:hover,
 #contactForm button[type="submit"]:hover {
     background-color: #00aced;
 }
 
 @media screen and (max-width: 991px) {
-    #contactForm button[type="submit"] {
+    .form button[type="submit"] {
         margin-left: auto;
     }
 }
@@ -93,7 +103,8 @@
 }
 
 /* error messages */
-.error-message {
+.error-message,
+.input-container label.error {
     font-style: italic;
     color: #fb6806;
     font-size: .8em;
@@ -101,7 +112,8 @@
     position: absolute;
 }
 
-.input-container:has(.error-message) input {
+.input-container:has(.error-message) input,
+.floating.error {
     background-color: #ffebdd;
     border-color: #ffebdd;
 }
@@ -109,4 +121,57 @@
 #confirmationMessage {
     flex-grow: 1;
     text-align: center;
+}
+
+/* .form--checkout{
+    padding: 2rem;
+    border: 1px solid;
+} */
+
+fieldset {
+    border: none;
+    padding: 0;
+}
+
+fieldset > * {
+    margin-bottom: 30px;
+}
+
+legend {
+    display: block;
+    font-size: 1.17em;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+
+select.has-placeholder {
+  color: #757575;
+}
+
+select.has-placeholder:valid {
+  color: black;
+  text-transform: uppercase;
+}
+
+/* error messages */
+.input-container label.error{
+  position: absolute;
+  left: 0;
+  top: 100%;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.floating.error ~ .ud-label,
+.floating.error:focus ~ .ud-label,
+.floating.error:not(:placeholder-shown) ~ label.ud-label{
+  color: #cb0d0d;
+}
+
+select option:not(:disabled){
+    text-transform: uppercase;
+}
+
+.customer-info > p{
+    margin: 0;
 }

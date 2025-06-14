@@ -4,6 +4,8 @@
   require_once "includes/common.php";
 
   $products = $cart->getItemsForDisplay($db);
+  $productCount = $cart->count();
+  $subtotal = $cart->calculateTotal();
   $cartClass = "cart-page";
   $displayType = "in-cart";
 

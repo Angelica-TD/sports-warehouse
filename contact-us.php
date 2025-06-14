@@ -9,7 +9,7 @@
   // Config
   $title = "Contact us";
   $styles = [
-    "contact.css"
+    "form.css"
   ];
 
   ob_start();

@@ -32,3 +32,16 @@ function getEncodedValue(string $fieldName): string
   // Generate HTML output
   return $fieldValue;
 }
+
+/**
+ * Return the "selected" attribute if the field value is selected.
+ *
+ * @param string $fieldName The name of the field to display.
+ * @param string $fieldValue The value of the field to compare against.
+ * @return string The "selected" attribute if the field value matches.
+ */
+function setSelected(string $fieldName, string $fieldValue): string
+{
+  // Compare the value from the POST array with the supplied value, return "selected" if they match
+  return ($_POST[$fieldName] ?? "") === $fieldValue ? "selected" : "";
+}

@@ -170,6 +170,8 @@ class ShoppingCart
                 "price" => $product->getOriginalPrice(),
                 "quantity" => $item->getQuantity(),
                 "salePrice" => $product->getSalePrice(),
+                "finalPrice" => $product->getFinalPrice(),
+                "totalItemPrice" => $item->getTotal(),
                 "photo" => $product->getPhoto(),
                 "inCart" => true
             ];

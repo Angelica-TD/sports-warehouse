@@ -23,6 +23,12 @@ class CartItem
     public function getPrice(): float { return $this->_price; }
     public function getItemId(): int { return $this->_productID; }
     public function getItemName(): string { return $this->_itemName; }
+    
+    public function getTotal(): float { 
+        $total = 0.0;
+        $total += $this->getQuantity() * $this->getPrice();
+        return $total;
+    }
 
     // setters
 

@@ -8,11 +8,11 @@
     <p>Stay tuned</p>
   </div>
 <?php else: ?>
-  <form id="contactForm" class="mobile-padding" action="contact-us.php" method="post" novalidate>
+  <form id="contactForm" class="form mobile-padding" action="contact-us.php" method="post" novalidate>
 
     <div class="input-group">
       <div class="input-container">
-        <input class="floating" type="text" id="firstName" name="firstName" placeholder="First name" required <?= setValue("firstName") ?>>
+        <input type="text" id="firstName" name="firstName" placeholder="First name" required <?= setValue("firstName") ?>>
         <label class="sr-only" for="firstName">First name</label>
 
         <?php if (!empty($errors["firstName"])): ?>
@@ -23,7 +23,7 @@
 
       </div>
       <div class="input-container">
-        <input class="floating" type="text" id="lastName" name="lastName" placeholder="Last name" required <?= setValue("lastName") ?>>
+        <input type="text" id="lastName" name="lastName" placeholder="Last name" required <?= setValue("lastName") ?>>
         <label class="sr-only" for="lastName">Last name</label>
 
         <?php if (!empty($errors["lastName"])): ?>
@@ -37,12 +37,12 @@
 
     <div class="input-group">
       <div class="input-container">
-        <input class="floating" type="tel" name="contactNumber" id="contactNumber" placeholder="Contact number" <?= setValue("contactNumber") ?>>
+        <input type="tel" name="contactNumber" id="contactNumber" placeholder="Contact number" <?= setValue("contactNumber") ?>>
         <label class="sr-only" for="contactNumber">Contact number</label>
       </div>
 
       <div class="input-container">
-        <input class="floating" type="email" name="emailAddress" id="emailAddress" placeholder="Email address" required <?= setValue("emailAddress") ?>>
+        <input type="email" name="emailAddress" id="emailAddress" placeholder="Email address" required <?= setValue("emailAddress") ?>>
         <label class="sr-only" for="emailAddress">Email address</label>
 
         <?php if (!empty($errors["email"])): ?>
@@ -56,7 +56,7 @@
 
     <div class="input-single">
 
-      <textarea class="floating" id="question" name="question" rows="3" placeholder="Type your question or message here.."><?= getEncodedValue("question") ?></textarea>
+      <textarea id="question" name="question" rows="3" placeholder="Type your question or message here.."><?= getEncodedValue("question") ?></textarea>
       <label class="sr-only" for="question">Type your question or message here..</label>
 
     </div>

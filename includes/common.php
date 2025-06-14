@@ -27,6 +27,7 @@
   require_once CLASSES_DIR . "CartItem.php";
   require_once CLASSES_DIR . "ShoppingCart.php";
   require_once CLASSES_DIR . "Product.php";
+  require_once CLASSES_DIR . "Customer.php";
 
   $product = new Product($db);
   $categories = $product->getAllProductCategories();

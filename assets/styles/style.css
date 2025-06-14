@@ -30,7 +30,7 @@
   --light-blue: #00ACED;
   --mid-blue: #006989;
   --dark-blue: #002936;
-  --light-grey: hsl(0deg 0% 59.15%);
+  --light-grey: #dfdfdf;
   --grey: hsla(0, 0%, 35%, 1);
   --orange: #FB6806;
   --white: #FFFFFF;
@@ -83,6 +83,10 @@ button{
   line-height: 1;
 }
 
+table{
+  width: 100%;
+}
+
 /* FS */
 .top-nav,
 footer nav{
@@ -112,6 +116,18 @@ footer nav{
   align-items: center;
 }
 
+.btn{
+  color: var(--white);
+  background-color: var(--mid-blue);
+  border-radius: 5px;
+  padding: 10px 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
 .strip{
   background-color: var(--orange);
   color: var(--white);
@@ -126,11 +142,17 @@ footer nav{
   padding-left: 2rem;
 }
 
-.strip--bgdarkblue{
+.strip--bgdarkblue,
+.btn--darkblue{
   background-color: var(--dark-blue);
 }
 
-.strip--bglightblue{
+.strip--bglightblue,
+.btn--lightblue{
+  background-color: var(--light-blue);
+}
+
+.btn--darkblue:hover{
   background-color: var(--light-blue);
 }
 
@@ -826,4 +848,42 @@ button[name="cartAction"]:hover{
 .pseudo-icon::before,
 .pseudo-icon::after{
   font-family: 'bootstrap-icons';
+}
+
+.cart-summary{
+  border-left: 1px solid var(--light-grey);
+  padding-inline: 2rem;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: end; */
+}
+
+/* COLUMN */
+.two-columns{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  column-gap: 20px;
+}
+
+/*  */
+
+.no-gap{
+  gap: unset;
+}
+
+.cart-summary td:last-child{
+  text-align: right;
+}
+
+.checkout table{
+  font-size: 1.4rem;
+  border-collapse: collapse;
+}
+
+.checkout td{
+  padding-block: 10px; 
+}
+
+.subtotal td{
+  border-top: 1px solid var(--light-grey);
 }
