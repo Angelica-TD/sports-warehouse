@@ -9,15 +9,16 @@
       exit;
   }
 
-  $product = new Product($db);
+  // $product = new Product($db);
 
   $itemId = (int) $_GET['id'];
 
   $product->loadSingleProductByID($itemId);
-  $productData = $product->getProductData();
+  $productData = $product->getProductData($cart);
+  $product = $productData;
 
   // Config
-  $title = $productData['productName'];
+  $title = $product['productName'];
   $styles = [
     "products.css"
   ];

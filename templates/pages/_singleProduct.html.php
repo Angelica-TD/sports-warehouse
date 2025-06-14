@@ -21,6 +21,8 @@
                     <?= htmlspecialchars($productData["description"]) ?>
                 </p>
 
+                <?php include BLOCK_TEMPLATES_DIR . "_cartButton.html.php"; ?>
+
             </section>           
 
         </article>

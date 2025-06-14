@@ -36,6 +36,7 @@
 
 .product--single .product{
     height: max-content;
+    gap: 20px;
 }
 
 .product--single:hover,
@@ -52,9 +53,14 @@
     padding-bottom: 20px;
 }
 
+.product--single .modify-quantity{
+    flex-direction: row;
+}
+
 @media screen and (max-width: 767px) {
     .product__image--single{
         border-bottom: 1px solid #dedede;
+        margin-bottom: 20px;
     }
 }
 
@@ -62,6 +68,7 @@
     .product__image--single {
         border-right: 1px solid #dedede;
         margin-right: 5rem;
+        width: 85%;
     }
 }
 

@@ -170,7 +170,7 @@ class Product
     }
   }
 
-  public function getProductData(): ?array
+  public function getProductData(ShoppingCart $cart): ?array
   {
 
     // check if a product has been loaded
@@ -178,9 +178,12 @@ class Product
         return null;
     }
 
+    // Attach quantity from cart
+    $quantity = $cart->getQuantityForProductId($this->_productID);
+
     // return product data for display
     return [
-      'productID' => $this->_productID,
+      'itemId' => $this->_productID,
       'productName' => $this->_productName,
       'photo' => $this->_photo,
       'originalPriceFormatted' => $this->getOriginalPriceFormatted(),
@@ -188,6 +191,8 @@ class Product
       'finalPriceFormatted' => $this->getFinalPriceFormatted(),
       'description' => $this->_description,
       'onSale' => $this->hasValidSalePrice(),
+      'inCart' => $quantity > 0 ? true : false,
+      'quantity' => $quantity,
     ];
 
   }
