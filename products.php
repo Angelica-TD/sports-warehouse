@@ -25,7 +25,7 @@
         $cart->addItem($cartProduct);
 
       }elseif($_POST["cartAction"] === "updateItemInCart"){ 
-        echo $quantity;
+        // echo $quantity;
         $cart->updateQuantity($cartProduct, $quantity);
       }
       else {

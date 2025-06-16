@@ -56,6 +56,7 @@ $(document).ready(function () {
 
 
   $("form.needs-validation").each(function () {
+
     const $form = $(this);
 
     $form.validate({
@@ -105,6 +106,10 @@ $(document).ready(function () {
         expiryYear: {
           required: true,
           cardNotExpired: true
+        },
+        cvv: {
+          required: true,
+          validCardNumber: true
         }
       },
       messages: {
@@ -128,7 +133,10 @@ $(document).ready(function () {
           minlength: "Postcode must be 4 digits",
           maxlength: "Postcode must be 4 digits"
         },
-        state: "Please select a state"
+        state: "Please select a state",
+        cvv: {
+          validCardNumber: "Numbers only"
+        }
       },
       errorPlacement: function (error, element) {
         error.insertAfter(element);
