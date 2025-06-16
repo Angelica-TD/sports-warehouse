@@ -893,3 +893,8 @@ button[name="cartAction"]:hover{
   justify-content: space-between;
   align-items: center;
 }
+
+.width-fit{
+  width: fit-content;
+  margin-inline: auto;
+}

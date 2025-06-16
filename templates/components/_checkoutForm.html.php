@@ -119,7 +119,7 @@
         </div>
 
         <?php if (!isset($_SESSION['infoSaved']) || (isset($_SESSION['editInfo']) && $_SESSION['editInfo'])): ?>
-        <button type="submit" name="saveShippingInfo" class="btn btn--darkblue">
+        <button type="submit" name="saveShippingInfo" class="btn btn--darkblue width-fit">
             Save and proceed to payment
         </button>
         <?php endif ?>
@@ -135,7 +135,7 @@
         <div class="input-single">
 
             <div class="input-container">
-                <input class="floating" type="text" id="cardName" name="cardName" placeholder="" required <?= setValue("cardName") ?>>
+                <input class="floating" type="text" id="cardName" name="cardName" placeholder="" required>
                 <label class="ud-label" for="cardName">Name on card</label>
 
                 <?php if (!empty($errors["cardName"])): ?>
@@ -151,7 +151,7 @@
         <div class="input-single">
 
             <div class="input-container">
-                <input class="floating" type="text" id="cardNumber" name="cardNumber" placeholder="" required <?= setValue("cardNumber") ?>>
+                <input class="floating" type="text" id="cardNumber" name="cardNumber" placeholder="" maxlength="19" pattern="\d*" inputmode="numeric" required>
                 <label class="ud-label" for="cardNumber">Credit card number</label>
 
                 <?php if (!empty($errors["cardNumber"])): ?>
@@ -218,8 +218,8 @@
             </div>
         </div>
 
-        <button type="submit" name="saveShippingInfo" class="btn btn--darkblue">
-            Proceed to payment
+        <button type="submit" name="placeOrder" class="btn btn--darkblue width-fit">
+            Place order
         </button>
 
     </fieldset>

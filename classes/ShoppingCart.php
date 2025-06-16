@@ -112,48 +112,47 @@ class ShoppingCart
     }
 
 
-    //save cart
-    public function saveCart(DBAccess $db, $Address, $ContactNumber, $CreditCardNumber, $CSV, $Email,
-    $ExpiryDate, $FirstName, $LastName, $NameOnCard)
+  //save order
+  public function saveOrder(DBAccess $db, $name, $address, $email, $contactNumber, $nameOnCard, $cardNumber, $cardMonth, $cardYear, $cvv)
+  {
+
+    $total = $this->calculateTotal();
+
+    //set up SQL statement to insert order
+    $sql = "insert into tblorder(shipName, shipAddress, orderDate, total, email, contactNumber, nameOnCard, cardNumber, cardExpiryMonth, cardExpiryYear, cvv) values(:Name, :Address, curdate(), :Total, :Email, :ContactNumber, :NameOnCard, :CreditCardNumber, :CardMonth, :CardYear, :CVV)";
+
+    $stmt = $db->prepareStatement($sql);
+    $stmt->bindValue(":Name", $name, PDO::PARAM_STR);
+    $stmt->bindValue(":Address", $address, PDO::PARAM_STR);
+    $stmt->bindValue(":Total" , $total, PDO::PARAM_STR);
+    $stmt->bindValue(":Email" , $email, PDO::PARAM_STR);
+    $stmt->bindValue(":ContactNumber" , $contactNumber, PDO::PARAM_STR);
+    $stmt->bindValue(":NameOnCard" , $nameOnCard, PDO::PARAM_STR);
+    $stmt->bindValue(":CreditCardNumber" , $cardNumber, PDO::PARAM_STR);
+    $stmt->bindValue(":CardMonth" , $cardMonth, PDO::PARAM_STR);
+    $stmt->bindValue(":CardYear" , $cardYear, PDO::PARAM_STR);
+    $stmt->bindValue(":CVV" , $cvv, PDO::PARAM_STR);
+    $shoppingOrderID = $db->executeNonQuery($stmt, true);
+
+    //loop through shopping cart, insert items
+    foreach ($this->_cartItems as $item)
     {
+        //set up insert statement
+        $sql = "insert into order_item(orderId, itemId, unitPrice, quantity)
+        values(:OrderID, :ItemID, :Price, :Quantity)";
 
-
-        //set up SQL statement to insert order
-        $sql = "insert into ShoppingOrder(Address, ContactNumber, CreditCardNumber, CSV,
-        Email, ExpiryDate, FirstName, LastName, NameOnCard, OrderDate) values(:Address, :ContactNumber, :CreditCardNumber, :CSV, :Email, :ExpiryDate, :FirstName, :LastName,
-        :NameOnCard, curdate())";
-
+        //for each item insert a row in order_item
         $stmt = $db->prepareStatement($sql);
-        $stmt->bindValue(":Address" , $Address, PDO::PARAM_STR);
-        $stmt->bindValue(":ContactNumber" , $ContactNumber, PDO::PARAM_STR);
-        $stmt->bindValue(":CreditCardNumber" , $CreditCardNumber, PDO::PARAM_STR);
-        $stmt->bindValue(":CSV" , $CSV, PDO::PARAM_STR);
-        $stmt->bindValue(":Email" , $Email, PDO::PARAM_STR);
-        $stmt->bindValue(":ExpiryDate" , $ExpiryDate, PDO::PARAM_STR);
-        $stmt->bindValue(":FirstName" , $FirstName, PDO::PARAM_STR);
-        $stmt->bindValue(":LastName" , $LastName, PDO::PARAM_STR);
-        $stmt->bindValue(":NameOnCard" , $NameOnCard, PDO::PARAM_STR);
-        $shoppingOrderID = $db->executeNonQuery($stmt, true);
-
-        //loop through shopping cart, insert items
-        foreach ($this->_cartItems as $item)
-        {
-            //set up insert statement
-            $sql = "insert into OrderItem(ItemID, Price, Quantity, shoppingOrderID)
-            values(:ItemID, :Price, :Quantity, :shoppingOrderID)";
-
-            //for each item insert a row in OrderItem
-            $stmt = $db->prepareStatement($sql);
-            $stmt->bindValue(":ItemID" , $item->getItemId(), PDO::PARAM_INT);
-            $stmt->bindValue(":Price" , $item->getPrice(), PDO::PARAM_STR);
-            $stmt->bindValue(":Quantity" , $item->getQuantity(), PDO::PARAM_INT);
-            $stmt->bindValue(":shoppingOrderID" , $shoppingOrderID, PDO::PARAM_INT);
-            $db->executeNonQuery($stmt);
-        }
-
-        return $shoppingOrderID;
-    
+        $stmt->bindValue(":OrderID" , $shoppingOrderID, PDO::PARAM_INT);
+        $stmt->bindValue(":ItemID" , $item->getItemId(), PDO::PARAM_INT);
+        $stmt->bindValue(":Price" , $item->getPrice(), PDO::PARAM_STR);
+        $stmt->bindValue(":Quantity" , $item->getQuantity(), PDO::PARAM_INT);
+        $db->executeNonQuery($stmt);
     }
+
+    return $shoppingOrderID;
+
+  }
 
     public function getItemsForDisplay(DBAccess $db)
     {

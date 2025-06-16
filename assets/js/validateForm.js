@@ -29,6 +29,31 @@ $(document).ready(function () {
     "Please enter a valid email address"
   );
 
+  $.validator.addMethod(
+    "validCardNumber",
+    function (value, element) {
+      return this.optional(element) || /^\d+$/.test(value);
+    },
+    "Credit card number must contain numbers only"
+  );
+
+  $.validator.addMethod("cardNotExpired", function (value, element, params) {
+    const month = parseInt($("#expiryMonth").val(), 10);
+    const year = parseInt($("#expiryYear").val(), 10);
+
+    if (!month || !year) return true;
+
+    const today = new Date();
+    const currentMonth = today.getMonth();
+    const currentYear = today.getFullYear();
+
+    if (year === currentYear && month === currentMonth + 1) {
+      return false;
+    }
+
+    return (year > currentYear) || (year === currentYear && month > currentMonth + 1);
+  }, "Card has expired");
+
 
   $("form.needs-validation").each(function () {
     const $form = $(this);
@@ -63,6 +88,23 @@ $(document).ready(function () {
         },
         state: {
           required: true
+        },
+        cardName: {
+          required: true,
+          noSpecialCharsExceptSingleQuote: true,
+          minlength: 2
+        },
+        cardNumber: {
+          required: true,
+          validCardNumber: true
+        },
+        expiryMonth: {
+          required: true,
+          cardNotExpired: true
+        },
+        expiryYear: {
+          required: true,
+          cardNotExpired: true
         }
       },
       messages: {
