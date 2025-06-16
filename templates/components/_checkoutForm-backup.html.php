@@ -9,7 +9,7 @@
 
         <div class="input-group">
             <div class="input-container">
-                <input class="floating" type="text" id="firstName" name="firstName" placeholder="" required <?= setValue("firstName", $customerInfo) ?>>
+                <input class="floating" type="text" id="firstName" name="firstName" placeholder="" required value="<?= htmlspecialchars($customerInfo["firstName"]) ?>">
                 <label class="ud-label" for="firstName">First name</label>
 
                 <?php if (!empty($errors["firstName"])): ?>
@@ -20,7 +20,7 @@
 
             </div>
             <div class="input-container">
-                <input class="floating" type="text" id="lastName" name="lastName" placeholder="" required <?= setValue("lastName", $customerInfo) ?>>
+                <input class="floating" type="text" id="lastName" name="lastName" placeholder="" required <?= htmlspecialchars($customerInfo["lastName"]) ?>>
                 <label class="ud-label" for="lastName">Last name</label>
 
                 <?php if (!empty($errors["lastName"])): ?>
@@ -34,12 +34,12 @@
 
         <div class="input-group">
             <div class="input-container">
-                <input class="floating" type="tel" name="contactNumber" id="contactNumber" placeholder="" <?= setValue("contactNumber", $customerInfo) ?>>
+                <input class="floating" type="tel" name="contactNumber" id="contactNumber" placeholder="" <?= htmlspecialchars($customerInfo["mobile"]) ?>>
                 <label class="ud-label" for="contactNumber">Contact number</label>
             </div>
 
             <div class="input-container">
-                <input class="floating" type="email" name="emailAddress" id="emailAddress" placeholder="" required <?= setValue("emailAddress", $customerInfo) ?>>
+                <input class="floating" type="email" name="emailAddress" id="emailAddress" placeholder="" required <?= htmlspecialchars($customerInfo["email"]) ?>>
                 <label class="ud-label" for="emailAddress">Email address</label>
 
                 <?php if (!empty($errors["email"])): ?>
@@ -54,7 +54,7 @@
         <div class="input-single">
 
             <div class="input-container">
-                <input class="floating" type="text" id="streetAddress" name="streetAddress" placeholder="" required <?= setValue("streetAddress", $customerInfo) ?>>
+                <input class="floating" type="text" id="streetAddress" name="streetAddress" placeholder="" required <?= htmlspecialchars($customerInfo["street"]) ?>>
                 <label class="ud-label" for="streetAddress">Street address</label>
 
                 <?php if (!empty($errors["streetAddress"])): ?>
@@ -70,7 +70,7 @@
         <div class="input-group">
             
             <div class="input-container">
-                <input class="floating" type="text" id="suburb" name="suburb" placeholder="" required <?= setValue("suburb", $customerInfo) ?>>
+                <input class="floating" type="text" id="suburb" name="suburb" placeholder="" required <?= htmlspecialchars($customerInfo["suburb"]) ?>>
                 <label class="ud-label" for="suburb">Suburb</label>
 
                 <?php if (!empty($errors["suburb"])): ?>
@@ -82,7 +82,7 @@
             </div>
 
             <div class="input-container">
-                <input class="floating" type="text" id="postcode" name="postcode" placeholder="" required <?= setValue("postcode", $customerInfo) ?>>
+                <input class="floating" type="text" id="postcode" name="postcode" placeholder="" required <?= htmlspecialchars($customerInfo["postcode"]) ?>>
                 <label class="ud-label" for="postcode">Postcode</label>
 
                 <?php if (!empty($errors["postcode"])): ?>
@@ -98,13 +98,13 @@
                 <label class="sr-only" for="state">State</label>
 
                 <select name="state" id="state" class="has-placeholder floating" required>
-                    <option value="" disabled hidden>State</option>
-                    <option <?= setSelected("state", "nsw", $customerInfo) ?> value="nsw">nsw</option>
-                    <option <?= setSelected("state", "qld", $customerInfo) ?> value="qld">qld</option>
-                    <option <?= setSelected("state", "vic", $customerInfo) ?> value="vic">vic</option>
-                    <option <?= setSelected("state", "wa", $customerInfo) ?> value="wa">wa</option>
-                    <option <?= setSelected("state", "tas", $customerInfo) ?> value="tas">tas</option>
-                    <option <?= setSelected("state", "sa", $customerInfo) ?> value="sa">sa</option>
+                    <option value="" disabled selected hidden>State</option>
+                    <option <?= setSelected("state", "nsw") ?> value="nsw">nsw</option>
+                    <option <?= setSelected("state", "qld") ?> value="qld">qld</option>
+                    <option <?= setSelected("state", "vic") ?> value="vic">vic</option>
+                    <option <?= setSelected("state", "wa") ?> value="wa">wa</option>
+                    <option <?= setSelected("state", "tas") ?> value="tas">tas</option>
+                    <option <?= setSelected("state", "sa") ?> value="sa">sa</option>
                 </select>
 
                 <?php if (!empty($errors["state"])): ?>
@@ -118,9 +118,9 @@
 
         </div>
 
-        <?php if (!isset($_SESSION['infoSaved']) || (isset($_SESSION['editInfo']) && $_SESSION['editInfo'])): ?>
+        <?php if (!isset($_SESSION['infoSaved'])): ?>
         <button type="submit" name="saveShippingInfo" class="btn btn--darkblue">
-            Save and proceed to payment
+            Proceed to payment
         </button>
         <?php endif ?>
 

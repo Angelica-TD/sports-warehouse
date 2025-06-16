@@ -9,10 +9,6 @@
 
       <?php if (isset($_SESSION['infoSaved'])): ?>
 
-      <h3>
-        Ship to
-      </h3>
-
       <?php include BLOCK_TEMPLATES_DIR . "_customerInfo.html.php"; ?>
 
       <?php endif ?>

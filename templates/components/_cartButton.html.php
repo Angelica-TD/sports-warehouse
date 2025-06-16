@@ -13,7 +13,7 @@
     <input type="hidden" name="returnUrl" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>">
 
     <button type="submit" class="<?= $product["inCart"] ? "update-quantity" : "add-to-cart" ?> pseudo-icon" name="cartAction" value="<?= $product["inCart"] ? "updateItemInCart" : "addToCart" ?>">
-        <?= $product["inCart"] ? "Update" : "Add to cart" ?>
+        <?= $product["inCart"] ? "Update quantity" : "Add to cart" ?>
     </button>
 
     <?php if ($cartClass === "cart-page"): ?>

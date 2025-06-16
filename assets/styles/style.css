@@ -887,3 +887,9 @@ button[name="cartAction"]:hover{
 .subtotal td{
   border-top: 1px solid var(--light-grey);
 }
+
+.d-flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

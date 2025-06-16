@@ -14,6 +14,12 @@
   $products = $cart->getItemsForDisplay($db);
   $subtotal = $cart->calculateTotal();
 
+  $_SESSION["editInfo"] = false;
+
+  if(isset($_POST["editShippingInfo"])){
+    $_SESSION["editInfo"] = true;
+  }
+
   if(isset($_POST["saveShippingInfo"]))
   {
 
@@ -66,22 +72,25 @@
 
       $_SESSION["customer"] = $customer;
       $_SESSION["infoSaved"] = true;
+      $_SESSION["editInfo"] = false;
 
       unset($_POST);
     }
 
   }
 
-  $customerInfo = null;
+  $customerInfo = [];
 
   if (isset($_SESSION["customer"])) {
     $customer = $_SESSION["customer"];
 
     $customerInfo = [
+      "firstName" => $customer->getFirstName(),
+      "lastName" => $customer->getLastName(),
       "fullName" => $customer->getFirstName() . " " . $customer->getLastName(),
-      "email" => $customer->getEmailAddress(),
-      "mobile" => $customer->getContactNumber(),
-      "street" => $customer->getStreetAddress(),
+      "emailAddress" => $customer->getEmailAddress(),
+      "contactNumber" => $customer->getContactNumber(),
+      "streetAddress" => $customer->getStreetAddress(),
       "suburb" => $customer->getSuburb(),
       "postcode" => $customer->getPostcode(),
       "state" => strtoupper($customer->getState()),

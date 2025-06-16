@@ -6,10 +6,10 @@
  * @param string $fieldName The name of the field to display.
  * @return string The HTML entity-encoded output for the form field.
  */
-function setValue(string $fieldName): string
+function setValue(string $fieldName, array $info = []): string
 {
   // Get HTML-encoded POST data value
-  $fieldValue = getEncodedValue($fieldName);
+  $fieldValue = getEncodedValue($fieldName, $info);
 
   // Generate HTML output
   return " value='$fieldValue'";
@@ -21,16 +21,18 @@ function setValue(string $fieldName): string
  * @param string $fieldName The name of the field to display.
  * @return string The HTML entity-encoded output for the form field.
  */
-function getEncodedValue(string $fieldName): string
+function getEncodedValue(string $fieldName, array $info = []): string
 {
-  // Get the value from the POST data
-  $fieldValue = $_POST[$fieldName] ?? "";
 
-  // Safely encode the value for HTML output
-  $fieldValue = htmlspecialchars($fieldValue);
+  if (isset($_POST[$fieldName])) {
+      $fieldValue = $_POST[$fieldName];
+  } elseif (isset($info[$fieldName])) {
+      $fieldValue = $info[$fieldName];
+  } else {
+      $fieldValue = "";
+  }
 
-  // Generate HTML output
-  return $fieldValue;
+  return htmlspecialchars($fieldValue ?? "", ENT_QUOTES);
 }
 
 /**
@@ -40,8 +42,8 @@ function getEncodedValue(string $fieldName): string
  * @param string $fieldValue The value of the field to compare against.
  * @return string The "selected" attribute if the field value matches.
  */
-function setSelected(string $fieldName, string $fieldValue): string
+function setSelected(string $fieldName, string $fieldValue, array $info = []): string
 {
-  // Compare the value from the POST array with the supplied value, return "selected" if they match
-  return ($_POST[$fieldName] ?? "") === $fieldValue ? "selected" : "";
+  $selectedValue = $_POST[$fieldName] ?? $info[$fieldName] ?? "";
+  return $selectedValue === $fieldValue ? "selected" : "";
 }

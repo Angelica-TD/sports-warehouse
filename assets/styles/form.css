@@ -175,3 +175,20 @@ select option:not(:disabled){
 .customer-info > p{
     margin: 0;
 }
+
+.customer-info{
+    border-bottom: 1px solid var(--light-grey);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.edit-info{
+  gap: 5px;
+  color: var(--dark-blue);
+  padding-block: 5px;
+}
+
+.edit-info::after{
+  font-family: bootstrap-icons;
+  content: '\F4CA';
+}
