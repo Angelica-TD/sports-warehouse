@@ -3,7 +3,10 @@ require_once "includes/common.php";
 require_once "classes/Auth.php";
 
 $title = "Login";
-$pageHeading = "Login";
+
+$scripts = [
+    "validateForm.js"
+];
 //the authentication class is static so there is no need to create an instance of the class
 $message = "";
 if (isset($_POST["loginSubmit"])) {

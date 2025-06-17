@@ -676,7 +676,8 @@ main p:not(:last-of-type){
     transition: color .1s ease-in-out;
   }
   
-  footer a:hover{
+  footer a:hover,
+  .nav--left a:hover{
     color: var(--grey);
   }
   
@@ -868,7 +869,7 @@ button[name="cartAction"]:hover{
  .two-columns{
     grid-template-columns: 2fr 1fr;
     column-gap: 20px;
-  } 
+  }
 }
 
 /*  */
@@ -903,4 +904,14 @@ button[name="cartAction"]:hover{
 .width-fit{
   width: fit-content;
   margin-inline: auto;
+}
+
+.nav--left{
+  background-color: var(--orange);
+}
+
+.admin-area{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  column-gap: 30px;
 }

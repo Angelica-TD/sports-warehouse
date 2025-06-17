@@ -11,7 +11,12 @@
                     </label>
 
                     <ul class="horizontal-list">
+                        <?php if (isset($_SESSION["username"])): ?>
+                        <li><a class="login icon-large" href="admin.php">Admin area</a></li>
+                        <li><a class="login icon-large" href="logout.php">Logout</a></li>
+                        <?php else: ?>
                         <li><a class="login icon-large" href="login.php">Login</a></li>
+                        <?php endif ?>
                         <li><a href="index.php">Home</a></li>
                         <li><a href="#">About SW</a></li>
                         <li><a href="contact-us.php">Contact Us</a></li>
@@ -21,7 +26,12 @@
 
                 <div class="account-actions">
                     <ul class="horizontal-list">
+                        <?php if (isset($_SESSION["username"])): ?>
+                        <li><a class="login icon-large" href="admin.php">Admin area</a></li>
+                        <li><a class="login icon-large" href="logout.php">Logout</a></li>
+                        <?php else: ?>
                         <li><a class="login icon-large" href="login.php">Login</a></li>
+                        <?php endif ?>
                         <li><a class="view-cart icon-large" href="view-cart.php">View Cart</a></li>
                         <li><a class="items-in-cart orange-fill-hover" href="view-cart.php"><?=$itemCount?> items</a></li>
                     </ul>
@@ -30,6 +40,8 @@
             </div>
         </div>
     </div>
+
+    <?php if (!isset($_SESSION["username"])): ?>
 
     <section class="section-constrained site-header flex-column gap-smaller">
         <div class="logo-container">
@@ -42,6 +54,8 @@
 
     </section>
 
+    
+        
     <div class="section-constrained">
         <nav class="strip strip--bgdarkblue" aria-label="Product category navigation">
             <ul class="horizontal-list horizontal-list--categories round-left pill">
@@ -50,6 +64,7 @@
         </nav>
     </div>
 
+    <?php endif ?>
     
 </header>
 

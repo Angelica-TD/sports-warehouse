@@ -1,4 +1,8 @@
-<form class="section-constrained" action="login.php" method="post">
+<form class="section-constrained needs-validation" action="login.php" method="post" novalidate>
+    <?php if (isset($error)): ?>
+        <p class="error-message"><?= $message ?></p>
+    <?php endif; ?>
+    
     <fieldset>
         <legend>Login</legend>
         <p>
@@ -14,6 +18,3 @@
         </p>
     </fieldset>
 </form>
-<?php if (isset($error)): ?>
-    <p class="error"><?= $message ?></p>
-<?php endif; ?>

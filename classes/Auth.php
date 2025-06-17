@@ -4,8 +4,8 @@
 class Authentication
 {
     //constants hold values that do not change
-    const LoginPageURL = "/sports-warehouse/login.php";
-    const SuccessPageURL = "/sports-warehouse/success.php";
+    const LoginPageURL = "login.php";
+    const SuccessPageURL = "admin.php";
     private static $_db;
     public static function login($uname, $pword, $db)
     {
