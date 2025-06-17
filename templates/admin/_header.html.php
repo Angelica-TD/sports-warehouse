@@ -12,25 +12,23 @@
 
                     <ul class="horizontal-list">
                         <?php if (isset($_SESSION["username"])): ?>
-                        <li><a class="login icon-large" href="admin.php">Admin area</a></li>
-                        <li><a class="login icon-large" href="logout.php">Logout</a></li>
+                        <li><a class="login icon-large" href="/sports-warehouse/admin">Admin area</a></li>
+                        <li><a class="login icon-large" href="../logout.php">Logout</a></li>
                         <?php else: ?>
-                        <li><a class="login icon-large" href="login.php">Login</a></li>
+                        <li><a class="login icon-large" href="../login.php">Login</a></li>
                         <?php endif ?>
-                        <li><a href="index.php">Go to SW website home page</a></li>
+                        <li><a href="/sports-warehouse/index.php">Go to SW website home page</a></li>
                     </ul>
                 </nav>
 
                 <div class="account-actions">
                     <ul class="horizontal-list">
                         <?php if (isset($_SESSION["username"])): ?>
-                        <li><a class="login icon-large" href="admin.php">Admin area</a></li>
-                        <li><a class="login icon-large" href="logout.php">Logout</a></li>
+                        <li><a class="login icon-large" href="/sports-warehouse/admin">Admin area</a></li>
+                        <li><a class="login icon-large" href="../logout.php">Logout</a></li>
                         <?php else: ?>
-                        <li><a class="login icon-large" href="login.php">Login</a></li>
+                        <li><a class="login icon-large" href="../login.php">Login</a></li>
                         <?php endif ?>
-                        <li><a class="view-cart icon-large" href="view-cart.php">View Cart</a></li>
-                        <li><a class="items-in-cart orange-fill-hover" href="view-cart.php"><?=$itemCount?> items</a></li>
                     </ul>
                 </div>
 
@@ -42,7 +40,7 @@
 
     <section class="section-constrained site-header flex-column gap-smaller">
         <div class="logo-container">
-            <a href="index.php" class="logo-link">
+            <a href="/sports-warehouse/index.php" class="logo-link">
                 <h1 class="sr-only">Sports Warehouse</h1>
             </a>
         </div>

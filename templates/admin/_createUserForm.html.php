@@ -1,4 +1,4 @@
-<form action="createUser.php" method="post">
+<form action="create-user.php" method="post">
     <fieldset>
         <legend>Create User</legend>
         <p>

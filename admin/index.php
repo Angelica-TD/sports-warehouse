@@ -1,18 +1,18 @@
 <?php
 
-require_once "includes/common.php";
-require_once "classes/Auth.php";
+require_once "../includes/common.php";
+require_once CLASSES_DIR . "Auth.php";
 
 $title = "Admin";
 $pageHeading = "This is for logged in users only";
 
 $loginName = $_SESSION["username"] ?? "";
 
-$action = $_GET["action"] ?? "";
-$adminActions = [
-    "change-password" => "_changePassword.html.php",
-    "test" => "_test.html.php",
-];
+// $action = $_GET["action"] ?? "";
+// $adminActions = [
+//     "change-password" => "_changePassword.html.php",
+//     "test" => "_test.html.php",
+// ];
 
 //the authentication class is static so there is no need to create an instance of the class
 $message = "";

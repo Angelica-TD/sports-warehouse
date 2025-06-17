@@ -1,4 +1,17 @@
-<form action="change-password.php" class="form form--box needs-validation" method="post" novalidate>
+<div>
+    <?php if(empty($categoryName)): ?>
+        <p>
+            Category not found
+        </p>
+    <?php else: ?>
+    <a href="view-categories.php">
+        Back to all categories
+    </a>
+    <h1>
+        <?= $title ?>
+    </h1>
+
+    <form action="change-password.php" class="form form--box needs-validation" method="post" novalidate>
     <p><?= $message ?></p>
     <fieldset>
         <legend><?= $title ?></legend>
@@ -37,4 +50,8 @@
             <input type="submit" name="changePassword" value="Change password">
         </p>
     </fieldset>
+    <?php endif ?>
 </form>
+</div>
+
+

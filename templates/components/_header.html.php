@@ -12,7 +12,7 @@
 
                     <ul class="horizontal-list">
                         <?php if (isset($_SESSION["username"])): ?>
-                        <li><a class="login icon-large" href="admin.php">Admin area</a></li>
+                        <li><a class="login icon-large" href="/sports-warehouse/admin">Admin area</a></li>
                         <li><a class="login icon-large" href="logout.php">Logout</a></li>
                         <?php else: ?>
                         <li><a class="login icon-large" href="login.php">Login</a></li>
@@ -27,7 +27,7 @@
                 <div class="account-actions">
                     <ul class="horizontal-list">
                         <?php if (isset($_SESSION["username"])): ?>
-                        <li><a class="login icon-large" href="admin.php">Admin area</a></li>
+                        <li><a class="login icon-large" href="/sports-warehouse/admin">Admin area</a></li>
                         <li><a class="login icon-large" href="logout.php">Logout</a></li>
                         <?php else: ?>
                         <li><a class="login icon-large" href="login.php">Login</a></li>

@@ -4,8 +4,8 @@
 class Authentication
 {
     //constants hold values that do not change
-    const LoginPageURL = "login.php";
-    const SuccessPageURL = "admin.php";
+    const LoginPageURL = "/sports-warehouse/login.php";
+    const SuccessPageURL = "/sports-warehouse/admin";
     // private static $_db;
 
     public static function login($uname, $pword, $db)
@@ -77,5 +77,53 @@ class Authentication
             throw $e;
         }
         return "New user added";
+    }
+
+    public static function verifyPassword($uname, $pword, $db)
+    {
+        try {
+            $sql = "SELECT password FROM user WHERE username = :username";
+            $stmt = $db->prepareStatement($sql);
+            $stmt->bindParam(":username", $uname, PDO::PARAM_STR);
+            $storedHash = $db->executeSQLReturnOneValue($stmt);
+
+            if ($storedHash && password_verify($pword, $storedHash)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
+    // update password
+    //create a new user
+    public static function updatePassword($uname, $pword, $db)
+    {
+        //hash the password
+        $hash = password_hash($pword, PASSWORD_DEFAULT);
+        
+        //update user in database
+        try {
+            // Set up SQL and bind parameters
+            $sql = "UPDATE user SET password = :password WHERE userName = :username";
+            $stmt = $db->prepareStatement($sql);
+            $stmt->bindParam(":username", $uname, PDO::PARAM_STR);
+            $stmt->bindParam(":password", $hash, PDO::PARAM_STR);
+
+            // Execute SQL
+            $result = $db->executeNonQuery($stmt);
+
+            // Check update success
+            if ($result > 0) {
+                return "Password updated successfully.";
+            } else {
+                return "No user found or password unchanged.";
+            }
+        } catch (PDOException $e) {
+            throw $e;
+        }
+
     }
 }

@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" media="print">
 
-  <link rel="stylesheet" href="./assets/styles/style.css">
+  <link rel="stylesheet" href="../assets/styles/style.css">
 
   <!-- Page-specific styles : begin -->
 
@@ -24,12 +24,12 @@
 
     foreach ($styles as $src) :
     ?>
-      <link rel="stylesheet" href="./assets/styles/<?= htmlspecialchars($src) ?>">
+      <link rel="stylesheet" href="../assets/styles/<?= htmlspecialchars($src) ?>">
     <?php endforeach; ?>
 
   <!-- Page-specific styles : end -->
 
-  <link rel="icon" type="image/x-icon" href="./assets/images/logos/sw-favicon.png">
+  <link rel="icon" type="image/x-icon" href="../assets/images/logos/sw-favicon.png">
 
   <script src="https://kit.fontawesome.com/fbcec5cfed.js" crossorigin="anonymous"></script>
   <meta name="description" content="<?= $metaDescription ?? '' ?>">
@@ -40,14 +40,18 @@
   
   <?php include TEMPLATES_DIR . "admin/_header.html.php"; ?>
 
-  <div class="section-wrapper flex-column gap-smaller">
+  <div class="section-constrained">
 
-    <main class="flex-column gap">
+    <main>
+      <div class="admin-area">
+        <?php include TEMPLATES_DIR . "admin/_adminLeftNav.html.php"; ?>
 
-    <?= $content ?? 'NO CONTENT - $content not defined' ?>
+        <?= $content ?? 'NO CONTENT - $content not defined' ?>
 
+        </div>
     </main>
-
+      
+      
   </div>
 
   <?php include TEMPLATES_DIR . "admin/_footer.html.php"; ?>

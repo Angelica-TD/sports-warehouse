@@ -23,5 +23,5 @@ $scripts = isset($scripts)
 
 foreach ($scripts as $src) :
 ?>
-    <script src="./assets/js/<?= htmlspecialchars($src) ?>"></script>
+    <script src="../assets/js/<?= htmlspecialchars($src) ?>"></script>
 <?php endforeach; ?>

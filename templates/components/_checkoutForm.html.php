@@ -1,4 +1,4 @@
-<form id="checkoutForm" class="form form--checkout needs-validation" action="checkout.php" method="post" novalidate>
+<form id="checkoutForm" class="form form--box needs-validation" action="checkout.php" method="post" novalidate>
 
     <?php if (!isset($_SESSION['infoSaved']) || (isset($_SESSION['editInfo']) && $_SESSION['editInfo'])): ?>
 

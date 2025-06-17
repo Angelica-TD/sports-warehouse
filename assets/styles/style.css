@@ -85,6 +85,7 @@ button{
 
 table{
   width: 100%;
+  border-collapse: collapse;
 }
 
 /* FS */
@@ -271,6 +272,10 @@ footer nav{
     padding-left: 2rem;
   }
 
+}
+
+.bordered td{
+  border: 1px solid var(--light-grey);
 }
 
 /* SECTION SPECIFIC CLASSES */
@@ -920,4 +925,13 @@ button[name="cartAction"]:hover{
     grid-template-columns: 1fr 3fr;
     min-height: 70vh;
   }
+}
+
+.delete::after{
+  content: "\F78A";
+}
+
+.edit-categories td:first-child,
+.edit-categories td:last-child{
+  text-align: center;
 }

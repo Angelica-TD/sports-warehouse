@@ -26,9 +26,9 @@
     border: 1px solid var(--grey);
 }
 
-.form--checkout input,
-.form--checkout textarea,
-.form--checkout select{
+.form--box input,
+.form--box textarea,
+.form--box select{
     border-radius: 4px;
     border: 1px solid var(--light-grey);
     padding-top: 15px;
@@ -123,7 +123,7 @@
     text-align: center;
 }
 
-/* .form--checkout{
+/* .form--box{
     padding: 2rem;
     border: 1px solid;
 } */
