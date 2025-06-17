@@ -6,7 +6,8 @@ class Authentication
     //constants hold values that do not change
     const LoginPageURL = "login.php";
     const SuccessPageURL = "admin.php";
-    private static $_db;
+    // private static $_db;
+
     public static function login($uname, $pword, $db)
     {
         $hash = "";

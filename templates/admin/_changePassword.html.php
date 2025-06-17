@@ -1,0 +1,3 @@
+<div>
+    Change password
+</div>

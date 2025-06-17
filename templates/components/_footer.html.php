@@ -41,9 +41,9 @@
         </div>
     </div>
     <div class="section-constrained copyright">
-        <p>&copy; Copyright 2222 Sports Warehouse.</p>
+        <p>&copy; Copyright 2025 Sports Warehouse.</p>
         <p>All rights reserved.</p>
-        <p>Website made by Awesomesauce Design and Angie.</p>
+        <p>Website made by Angie.</p>
     </div>
 </footer>
 

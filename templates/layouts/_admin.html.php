@@ -38,7 +38,7 @@
 
 <body class="flex-column gap">
   
-  <?php include BLOCK_TEMPLATES_DIR . "_header.html.php"; ?>
+  <?php include TEMPLATES_DIR . "admin/_header.html.php"; ?>
 
   <div class="section-wrapper flex-column gap-smaller">
 
@@ -50,7 +50,7 @@
 
   </div>
 
-  <?php include BLOCK_TEMPLATES_DIR . "_footer.html.php"; ?>
+  <?php include TEMPLATES_DIR . "admin/_footer.html.php"; ?>
 
 </body>
 </html>

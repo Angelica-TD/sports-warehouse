@@ -912,6 +912,12 @@ button[name="cartAction"]:hover{
 
 .admin-area{
   display: grid;
-  grid-template-columns: 1fr 3fr;
   column-gap: 30px;
+}
+
+@media screen and (min-width: 768px) {
+  .admin-area{
+    grid-template-columns: 1fr 3fr;
+    min-height: 70vh;
+  }
 }
