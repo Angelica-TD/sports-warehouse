@@ -23,7 +23,6 @@
   // Database connection (create DBAccess instance in the $db variable)
   require_once INCLUDES_DIR . "database.php";
 
-  // Include ShoppingCart class which is used in every page
   require_once CLASSES_DIR . "CartItem.php";
   require_once CLASSES_DIR . "ShoppingCart.php";
   require_once CLASSES_DIR . "Product.php";
