@@ -41,7 +41,6 @@
         </div>
     </div>
 
-    <?php if (!isset($_SESSION["username"])): ?>
 
     <section class="section-constrained site-header flex-column gap-smaller">
         <div class="logo-container">
@@ -64,7 +63,6 @@
         </nav>
     </div>
 
-    <?php endif ?>
     
 </header>
 

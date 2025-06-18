@@ -21,7 +21,7 @@
   <div class="partnerships-info flex-column gap">
     <div class="intro">
       <p>
-        These are some of our top brands and partnerships.
+        aaaaThese are some of our top brands and partnerships.
       </p>
       <p class="intro--blue">
         The best of the best is here.

@@ -10,7 +10,8 @@
     exit();
   }
 
-  session_destroy();
+  unset($_SESSION["cart"]);
+  unset($_SESSION["editInfo"]);
 
   ob_start();
 
