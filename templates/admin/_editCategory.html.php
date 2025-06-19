@@ -11,43 +11,28 @@
         <?= $title ?>
     </h1>
 
-    <form action="change-password.php" class="form form--box needs-validation" method="post" novalidate>
+    <form action="edit-category.php" class="form form--box needs-validation" method="post" novalidate>
     <p><?= $message ?></p>
     <fieldset>
         <legend><?= $title ?></legend>
+
         <p>
-            <label for="currentPassword">Current password:</label>
-            <input type="password" id="currentPassword" name="currentPassword" required>
-            <?php if (!empty($errors["currentPassword"])): ?>
-                <div class="error-message">
-                <?= $errors["currentPassword"] ?>
-                </div>
-            <?php endif ?>
-        </p>
-        <p>
-            <label for="newPassword">New password:</label>
-            <input type="password" id="newPassword" name="newPassword" required>
-            <?php if (!empty($errors["newPassword"])): ?>
-                <div class="error-message">
-                <?= $errors["newPassword"] ?>
-                </div>
-            <?php endif ?>
+            Category ID: <?=$categoryID?>
         </p>
 
         <p>
-            <label for="newPasswordAgain">Re-type new password:</label>
-            <input type="password" id="newPasswordAgain" name="newPasswordAgain" required>
-
-            <?php if (!empty($errors["newPasswordAgain"])): ?>
+            <label for="newCategoryName">Category name:</label>
+            <input type="text" id="newCategoryName" name="newCategoryName" value="<?=$categoryName?>" required>
+            <input type="hidden" id="categoryID" name="categoryID" value="<?=$categoryID?>">
+            <?php if (!empty($errors["newCategoryName"])): ?>
                 <div class="error-message">
-                <?= $errors["newPasswordAgain"] ?>
+                <?= $errors["newCategoryName"] ?>
                 </div>
             <?php endif ?>
         </p>
 
-
         <p>
-            <input type="submit" name="changePassword" value="Change password">
+            <input type="submit" name="editCategory" value="Update">
         </p>
     </fieldset>
     <?php endif ?>

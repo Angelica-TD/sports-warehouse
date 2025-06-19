@@ -63,11 +63,11 @@ class Category
     // Remove spaces
     $value = trim($categoryName);
 
-    // Check string length (between 1 & 15)
-    if (strlen($value) < 1 || strlen($value) > 15) {
+    // Check string length (between 1 & 50)
+    if (strlen($value) < 1 || strlen($value) > 50) {
       
       // Invalid new value - throw an exception
-      throw new Exception("Category name must be 1-15 characters.");
+      throw new Exception("Category name must be 1-50 characters.");
     }
 
     // Store new value in the private property
@@ -230,7 +230,7 @@ class Category
       // Define query, prepare statement, bind parameters
       $sql = <<<SQL
         UPDATE 	category
-        SET 	  categoryName = :CategoryName = :Description
+        SET 	  categoryName = :CategoryName
         WHERE 	categoryId = :categoryId
       SQL;
       $stmt = $this->_db->prepareStatement($sql);

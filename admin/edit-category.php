@@ -8,11 +8,29 @@ Authentication::protect();
 
 $message = "";
 
-
-
-if(isset($_GET["id"])){
+if (isset($_GET["id"]) || isset($_POST["editCategory"])) {
   $category = new Category($db);
-  $category->getCategory(intval($_GET["id"]));
+
+  if (isset($_GET["id"])) {
+    $categoryID = intval($_GET["id"]);
+  } elseif (isset($_POST["categoryID"])) {
+    $categoryID = intval($_POST["categoryID"]);
+  } else {
+    // fallback or error handling if neither is set
+    $categoryID = 0;
+  }
+
+  $category->getCategory($categoryID);
+  
+
+  if (isset($_POST["editCategory"])) {
+    $setCategoryName = $category->setCategoryName($_POST["newCategoryName"]);
+    $updateCategory = $category->updateCategory($categoryID);
+    if ($updateCategory) {
+      $message = "Category has been updated";
+    }
+  }
+
   $categoryName = $category->getCategoryName();
 } else {
   header("Location: view-categories.php");
