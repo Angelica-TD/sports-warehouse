@@ -128,6 +128,13 @@ $(document).ready(function () {
         newCategoryName: {
           required: true,
           noWhitespaceOnly: true,
+        },
+        productName: {
+          required: true,
+          noWhitespaceOnly: true,
+        },
+        productDescription: {
+          noWhitespaceOnly: true,
         }
       },
       messages: {

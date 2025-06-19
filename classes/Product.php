@@ -52,9 +52,14 @@ class Product
   }
 
 
-  public function getPhoto(): string { return $this->_photo; }
+  public function getPhoto(): ?string { return $this->_photo; }
   public function getOriginalPrice(): float { return $this->_originalPrice; }
   public function getSalePrice(): ?float { return $this->_salePrice; }
+  public function getCategory(): int { return $this->_categoryID; }
+  // public function getImage(): ?string { return $this->_photo; }
+  public function getDescription(): ?string { return $this->_description; }
+  public function getPrice(): float { return $this->_originalPrice; }
+  public function getFeatured(): int { return $this->_productFeatured; }
   
   public function getFinalPrice(): float 
   { 
@@ -176,7 +181,7 @@ class Product
     $this->_db->connect();
     try {
       $sql = <<<SQL
-                SELECT	itemId, itemName, photo, price, salePrice, description
+                SELECT	itemId, itemName, photo, price, salePrice, description, categoryId, featured
                 FROM    item
                 WHERE   itemId = :itemId
                 SQL;
@@ -192,6 +197,8 @@ class Product
       $this->_originalPrice = $item["price"];
       $this->_salePrice = isset($item["salePrice"]) ? (float) $item["salePrice"] : null;
       $this->_description = $item["description"];
+      $this->_categoryID = $item["categoryId"];
+      $this->_productFeatured = $item["featured"];
       
     } catch (PDOException $e) {
       throw $e;
@@ -298,6 +305,34 @@ class Product
       throw $ex;
     }
     
+  }
+
+  public function update(int $id): bool
+  {
+    try {
+
+      // Define query, prepare statement, bind parameters
+      $sql = <<<SQL
+        UPDATE 	item
+        SET 	  itemName = :itemName, photo = :photo, price = :price, salePrice = :salePrice, description = :description, featured = :featured, categoryId = :categoryId
+        WHERE 	itemId = :itemId
+      SQL;
+      $stmt = $this->_db->prepareStatement($sql);
+      $stmt->bindValue(":itemName", $this->_productName, PDO::PARAM_STR);
+      $stmt->bindValue(":photo", $this->_photo, PDO::PARAM_STR);
+      $stmt->bindValue(":price", $this->_originalPrice, PDO::PARAM_STR);
+      $stmt->bindValue(":salePrice", $this->_salePrice, PDO::PARAM_STR);
+      $stmt->bindValue(":description", $this->_description, PDO::PARAM_STR);
+      $stmt->bindValue(":featured", $this->_productFeatured, PDO::PARAM_INT);
+      $stmt->bindValue(":categoryId", $this->_categoryID, PDO::PARAM_INT);
+      $stmt->bindValue(":itemId", $id, PDO::PARAM_INT);
+
+      // Execute query and return success value (true/false)
+      return $this->_db->executeNonQuery($stmt);
+
+    } catch (Exception $ex) {
+      throw $ex;
+    }
   }
   
   // private methods
