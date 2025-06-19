@@ -30,9 +30,14 @@
                         </a>
                     </td>
                     <td>
-                        <a class="pseudo-icon delete" href="deleteCategory.php?id=<?=$category["categoryId"]?>">
-                            
-                        </a>
+                        <form method="post" action="delete-category.php">
+                            <input type="hidden" name="categoryId" id="categoryId" value="<?=$category["categoryId"]?>">
+                            <button type="submit" class="pseudo-icon delete" name="deleteCategory">
+
+                            </button>
+
+                        </form>
+                        
                     </td>
                 </tr>
             <?php endforeach ?>

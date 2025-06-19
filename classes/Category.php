@@ -262,7 +262,7 @@ class Category
       // Define query, prepare statement, bind parameters
       $sql = <<<SQL
         DELETE
-        FROM 	  categories
+        FROM 	  category
         WHERE 	categoryId = :categoryId
       SQL;
       $stmt = $this->_db->prepareStatement($sql);
