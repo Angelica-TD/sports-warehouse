@@ -254,27 +254,36 @@ class Category
    */
   public function deleteCategory(int $id): bool
   {
-    try {
-      
-      // Open the database connection
-      $this->_db->connect();
+      try {
+          // Open the database connection
+          $this->_db->connect();
 
-      // Define query, prepare statement, bind parameters
-      $sql = <<<SQL
-        DELETE
-        FROM 	  category
-        WHERE 	categoryId = :categoryId
-      SQL;
-      $stmt = $this->_db->prepareStatement($sql);
-      $stmt->bindValue(":categoryId", $id, PDO::PARAM_INT);
+          // 1. Check if products exist in this category
+          $checkSql = "SELECT COUNT(*) FROM item WHERE categoryId = :categoryId";
+          $checkStmt = $this->_db->prepareStatement($checkSql);
+          $checkStmt->bindValue(":categoryId", $id, PDO::PARAM_INT);
+          $productCount = $this->_db->executeSQLReturnOneValue($checkStmt);
 
-      // Execute query and return success value (true/false)
-      return $this->_db->executeNonQuery($stmt);
+          if ($productCount > 0) {
+              // Cannot delete category because products exist
+              return false;
+          }
 
-    } catch (Exception $ex) {
-      throw $ex;
-    }
+          // 2. Safe to delete category
+          $deleteSql = <<<SQL
+              DELETE FROM category
+              WHERE categoryId = :categoryId
+          SQL;
+          $deleteStmt = $this->_db->prepareStatement($deleteSql);
+          $deleteStmt->bindValue(":categoryId", $id, PDO::PARAM_INT);
+
+          return $this->_db->executeNonQuery($deleteStmt);
+
+      } catch (Exception $ex) {
+          throw $ex;
+      }
   }
+
 
   #endregion
 

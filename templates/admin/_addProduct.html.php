@@ -13,7 +13,7 @@
         Product successfully added.
     </p>
 
-    <a href="edit-category.php?id=<?=$newProductId?>">View / edit here</a>
+    <a href="edit-product.php?id=<?=$newProductId?>">View / edit here</a>
 
     <p>
         Or add another below:

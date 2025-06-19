@@ -2,115 +2,87 @@
 require_once "../includes/common.php";
 require_once CLASSES_DIR . "Auth.php";
 
-//the authentication class is static so there is no need to create an instance of the class
 Authentication::protect();
 
 $message = "";
 
 if (isset($_POST["addProduct"])) {
+    $errors = [];
 
-  $errors = [];
+    $productName = $_POST["productName"] ?? "";
+    $category = $_POST["category"] ?? "";
+    $productDescription = $_POST["productDescription"] ?? "";
+    $productPrice = $_POST["productPrice"] ?? null;
+    $productSalePrice = $_POST["productSalePrice"] ?? null;
+    $productFeatured = $_POST["productFeatured"] ?? "";
 
-  $productName = $_POST["productName"] ?? "";
-  $category = $_POST["category"] ?? "";
-  $productImage = $_POST["productImage"] ?? null;
-  $productDescription = $_POST["productDescription"] ?? "";
-  $productPrice = $_POST["productPrice"] ?? null;
-  $productSalePrice = $_POST["productSalePrice"] ?? null;
-  $productFeatured = $_POST["productFeatured"] ?? "";
-
-  if ($productName === "") {
-    $errors["productName"] = "This is required";
-  }
-  if ($category === "") {
-    $errors["category"] = "This is required";
-  }
-  if (!isset($productPrice)) {
-    $errors["productPrice"] = "This is required";
-  }
-
-  /* 
-    * Photo file upload
-    */
-
-  // File upload settings
-  $targetDirectory = IMAGES_DIR;
-  $fileUploadOptional = true;
-
-  // Skip file upload if no file given and upload is optional
-  if (!($fileUploadOptional && $_FILES["productImage"]["error"] === UPLOAD_ERR_NO_FILE)) {
-
-    // Get the filename of the uploaded file (what was it originally called?)
-    $fileName = basename($_FILES["productImage"]["name"]);
-
-    // Make sure file is an image (using file extension)
-    $validExtensions = ["jpg", "jpeg", "gif", "png"];
-    $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
-
-    if (!in_array($fileExtension, $validExtensions)) {
-      $errors["productImage"] = "Invalid file extension, must be: " . implode(", ", $validExtensions);
+    if ($productName === "") {
+        $errors["productName"] = "This is required";
     }
-    
-    // Check file size (not too big) using php.ini config and MAX_FILE_SIZE set in the form
-    // You can also manually check the ["size"] of the file
-    if (
-      $_FILES["productImage"]["error"] === UPLOAD_ERR_FORM_SIZE ||
-      $_FILES["productImage"]["error"] === UPLOAD_ERR_INI_SIZE
-    ) {
-      $errors["productImage"] = "File is too large.";
+    if ($category === "") {
+        $errors["category"] = "This is required";
+    }
+    if (!isset($productPrice)) {
+        $errors["productPrice"] = "This is required";
     }
 
-    // Make sure there are no file errors detected
-    if (empty($errors["productImage"])) {
+    // Default image value
+    $photoPath = null;
 
-      $moveFrom = $_FILES["productImage"]["tmp_name"];
-      $moveTo = $targetDirectory . $fileName;
+    // File upload
+    if (isset($_FILES["productImage"]) && $_FILES["productImage"]["error"] !== UPLOAD_ERR_NO_FILE) {
+        $targetDirectory = IMAGES_DIR . "products/";
+        $fileName = basename($_FILES["productImage"]["name"]);
+        $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        $validExtensions = ["jpg", "jpeg", "gif", "png"];
 
-      // Move uploaded file from the temp location into the target location
-      if (move_uploaded_file($moveFrom, $moveTo)) {
+        if (!in_array($fileExtension, $validExtensions)) {
+            $errors["productImage"] = "Invalid file extension. Allowed: " . implode(", ", $validExtensions);
+        }
 
-        // Success
-        $photoPath = $fileName;
+        if ($_FILES["productImage"]["size"] > 2 * 1024 * 1024) {
+            $errors["productImage"] = "Image is too large (max 2MB).";
+        }
 
-      } else {
+        if (!isset($errors["productImage"])) {
+            // Optional: give it a unique name to prevent overwrites
+            $uniqueName = uniqid("img_", true) . "." . $fileExtension;
+            $moveTo = $targetDirectory . $uniqueName;
 
-        // Error
-        $errors["productImage"] = "Uploaded file could not be moved.";
-
-      }
+            if (move_uploaded_file($_FILES["productImage"]["tmp_name"], $moveTo)) {
+                $photoPath = $uniqueName;
+            } else {
+                $errors["productImage"] = "Uploaded file could not be moved.";
+            }
+        }
     }
-  }
 
-  $success = count($errors) === 0 ? true : false;
+    if (empty($errors)) {
+        $product = new Product($db);
+        $product->setProductName($productName);
+        $product->setCategory($category);
+        $product->setImage($photoPath); // this may be null if no image uploaded
+        $product->setDescription($productDescription);
+        $product->setPrice($productPrice);
 
-  if ($success) {
-    $product = new Product($db);
-    $product->setProductName($productName);
-    $product->setCategory($category);
-    $product->setImage($productImage);
-    $product->setDescription($productDescription);
-    $product->setPrice($productPrice);
-    if($productSalePrice){
-      $product->setSalePrice($productSalePrice);
+        if ($productSalePrice) {
+            $product->setSalePrice($productSalePrice);
+        }
+
+        $product->setFeatured($productFeatured);
+
+        $newProductId = $product->insert();
+        if ($newProductId) {
+            $message = "Product has been added successfully.";
+        }
     }
-    
-    $product->setFeatured($productFeatured);
-
-    $newProductId = $product->insert();
-  }
 }
 
 $title = "Add a new product";
-$scripts = [
-    "validateForm.js"
-];
+$scripts = ["validateForm.js"];
 
-
-//start buffer
 ob_start();
-
 include_once TEMPLATES_DIR . "admin/_addProduct.html.php";
-
 $content = ob_get_clean();
 include_once LAYOUT_TEMPLATES_DIR . "_admin.html.php";
 ?>

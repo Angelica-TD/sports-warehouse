@@ -32,7 +32,7 @@
                     <td>
                         <form method="post" action="delete-product.php">
                             <input type="hidden" name="productId" id="productId" value="<?=$product["itemId"]?>">
-                            <button type="submit" class="pseudo-icon delete" name="deleteproduct">
+                            <button type="submit" class="pseudo-icon delete" name="deleteProduct">
 
                             </button>
 

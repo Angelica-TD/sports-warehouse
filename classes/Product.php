@@ -334,6 +334,27 @@ class Product
       throw $ex;
     }
   }
+
+  public function deleteProduct(int $id): bool
+  {
+    try {
+      
+      // Define query, prepare statement, bind parameters
+      $sql = <<<SQL
+        DELETE
+        FROM 	  item
+        WHERE 	itemId = :itemId
+      SQL;
+      $stmt = $this->_db->prepareStatement($sql);
+      $stmt->bindValue(":itemId", $id, PDO::PARAM_INT);
+
+      // Execute query and return success value (true/false)
+      return $this->_db->executeNonQuery($stmt);
+
+    } catch (Exception $ex) {
+      throw $ex;
+    }
+  }
   
   // private methods
 
