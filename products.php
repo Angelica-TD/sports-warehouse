@@ -60,7 +60,7 @@
     $result = $product->getProductsByCategory($categoryId, $cart, $currentPage);
     $categoryName = $product->getCategoryName($categoryId);
   } else {
-    $result = $product->getAllProducts($cart);
+    $result = $product->getAllProducts($cart, $currentPage);
     $categoryName = "All Products";
   }
 
@@ -71,8 +71,8 @@
   $totalPages = $result['totalPages'];
 
   // Redirect if page out of range
-  if ($currentPage != $result['currentPage']) {
-      header("Location: products.php?id=$categoryId&page=" . $result['currentPage']);
+  if ($currentPage <= 0 || $currentPage > $totalPages) {
+      header("Location: products.php");
       exit;
   }
 

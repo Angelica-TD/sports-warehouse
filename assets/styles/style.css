@@ -935,3 +935,9 @@ button[name="cartAction"]:hover{
 .edit-categories td:last-child{
   text-align: center;
 }
+
+.admin-left-nav{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

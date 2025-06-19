@@ -11,8 +11,15 @@
         
         $baseUrl = "search.php?search-product={$searchTerm}&page=";
     
-    } elseif ($currentPageUrl === 'products.php' && isset($_GET['id'])) {
+    } elseif ($currentPageUrl === 'products.php') {
+        if(isset($_GET["id"])){
+            $baseUrl = "products.php?id=" . urlencode($_GET['id']) . "&page=";
+        } else {
+            $baseUrl = "products.php?page=";
+        }
         
-        $baseUrl = "products.php?id=" . urlencode($_GET['id']) . "&page=";
+    } elseif ($currentPageUrl === 'view-products.php') {
+        
+        $baseUrl = "view-products.php?page=";
         
     }

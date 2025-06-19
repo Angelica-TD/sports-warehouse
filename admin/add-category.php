@@ -9,11 +9,23 @@ Authentication::protect();
 $message = "";
 
 if (isset($_POST["addCategory"])) {
-  $category = new Category($db);
-  $categoryName = $_POST["newCategoryName"];
 
-  $category->setCategoryName($categoryName);
-  $newCategoryId = $category->insertCategory();
+  $errors = [];
+
+  $category = new Category($db);
+  $categoryName = $_POST["newCategoryName"] ?? "";
+
+  if ($categoryName === "") {
+    $errors["newCategoryName"] = "This is required";
+  }
+
+  $success = count($errors) === 0 ? true : false;
+
+  if ($success) {
+    $category->setCategoryName($categoryName);
+    $newCategoryId = $category->insertCategory();
+  }
+
 
   // header("Location: edit-category.php?id=" . $newCategoryId);
   // exit();

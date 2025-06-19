@@ -12,13 +12,20 @@
             ?>
             <article class="product product--<?= $displayType ?>">
                 <a href="product.php?id=<?= $product["itemId"] ?>">
-                    <img class="product__image" src="./assets/images/products/<?= $product["photo"] ?>" alt="">
+                    <?php
+                    $photo = !empty($product["photo"]) && file_exists("./assets/images/products/{$product["photo"]}")
+                        ? $product["photo"]
+                        : "placeholder.png";
+                    ?>
+                    <img class="product__image" src="./assets/images/products/<?= $photo ?>" alt="">
                 </a>
 
                 <div class="product__price <?= $isOnSale ? 'product__price--sale' : '' ?>">
+                    <?php if ($price > 0): ?>
                     <?= $priceFormatted ?>
                     <?php if ($isOnSale): ?>
                         <small>was <del><?= $originalPriceFormatted ?></del></small>
+                    <?php endif ?>
                     <?php endif ?>
                 </div>
 
@@ -28,8 +35,9 @@
                     </h3>
                 </a>
 
+                <?php if ($price > 0): ?>
                 <?php include BLOCK_TEMPLATES_DIR . "_cartButton.html.php"; ?>
-
+                <?php endif ?>
 
             </article>
         <?php endforeach ?>

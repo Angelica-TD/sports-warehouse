@@ -15,15 +15,7 @@ $scripts = [
 //start buffer
 ob_start();
 
-if(isset($_GET["action"])){
-  $action = $_GET["action"];
-
-  include_once TEMPLATES_DIR . "admin/" . $action . "Categories.html.php";
-
-} else {
-  include_once TEMPLATES_DIR . "admin/_listAllCategories.html.php";
-}
-
+include_once TEMPLATES_DIR . "admin/_listAllCategories.html.php";
 
 $content = ob_get_clean();
 include_once LAYOUT_TEMPLATES_DIR . "_admin.html.php";

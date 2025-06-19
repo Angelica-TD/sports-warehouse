@@ -8,8 +8,10 @@ class Product
   private $_originalPrice;
   private $_photo;
   private $_description;
-  private $_salePrice;
+  private $_salePrice = null;
   private $_activeProductCategory;
+  private $_categoryID;
+  private $_productFeatured;
   private DBAccess $_db;
 
   public function __construct(DBAccess $db)
@@ -21,7 +23,35 @@ class Product
   // getters
 
   public function getProductID(): int { return $this->_productID; }
+
   public function getProductName(): string { return $this->_productName; }
+
+  /**
+   * Set product name
+   *
+   * @param  string $productName The new product name
+   * @return void
+   */
+  public function setProductName($productName)
+  {
+    // Remove spaces
+    $value = trim($productName);
+
+    // Check string length (between 1 & 40)
+    if (strlen($value) < 1 || strlen($value) > 40) {
+      
+      // Invalid new value - throw an exception
+      throw new Exception("Product name must be between 1 and 40 characters.");
+
+    } else {
+      
+      // Store new value in private property
+      $this->_productName = $value;
+
+    }
+  }
+
+
   public function getPhoto(): string { return $this->_photo; }
   public function getOriginalPrice(): float { return $this->_originalPrice; }
   public function getSalePrice(): ?float { return $this->_salePrice; }
@@ -195,7 +225,7 @@ class Product
 
   }
 
-  public function getAllProducts(ShoppingCart $cart, int $currentPage = 1, int $itemsPerPage = 10): array
+  public function getAllProducts(?ShoppingCart $cart=null, int $currentPage = 1, int $itemsPerPage = 10): array
   {
     return $this->getPaginatedProducts(null, null, $cart, $currentPage, $itemsPerPage);
   }
@@ -219,6 +249,56 @@ class Product
   }
 
   public function getActiveProductCategory() : ?int { return $this->_activeProductCategory; }
+
+
+  public function setCategory($categoryID) { 
+    $id = intval($categoryID);
+    if ($id <= 0) {
+      throw new Exception("Invalid category ID");
+    }
+    $this->_categoryID = $id;
+  }
+
+  public function setImage($photoName) { $this->_photo = $photoName; }
+
+  public function setDescription($desc) { $this->_description = trim($desc); }
+
+  public function setPrice($price) { $this->_originalPrice = floatval($price); }
+
+  public function setSalePrice($price) { $this->_salePrice = floatval($price); }
+
+  public function setFeatured($featured) {
+    $this->_productFeatured = (int) boolval($featured);
+  }
+
+  public function insert()
+  {
+
+    try {
+
+      // Define query, prepare statement, bind parameters
+      $sql = <<<SQL
+        INSERT INTO item (itemName, photo, price, salePrice, description, featured, categoryId)
+        VALUES (:productName, :photo, :originalPrice, :salePrice, :description, :productFeatured, :categoryID)
+      SQL;
+      $stmt = $this->_db->prepareStatement($sql);
+      $stmt->bindValue(":productName", $this->_productName, PDO::PARAM_STR);
+      $stmt->bindValue(":photo", $this->_photo, PDO::PARAM_STR);
+      $stmt->bindValue(":originalPrice", $this->_originalPrice, PDO::PARAM_STR);
+      $stmt->bindValue(":salePrice", $this->_salePrice, PDO::PARAM_STR);
+      $stmt->bindValue(":description", $this->_description, PDO::PARAM_STR);
+      $stmt->bindValue(":productFeatured", $this->_productFeatured, PDO::PARAM_STR);
+      $stmt->bindValue(":categoryID", $this->_categoryID, PDO::PARAM_STR);
+
+      // Execute query and return new ID
+      // true means return the new ID (primary key value)
+      return $this->_db->executeNonQuery($stmt, true);
+
+    } catch (Exception $ex) {
+      throw $ex;
+    }
+    
+  }
   
   // private methods
 
@@ -227,7 +307,7 @@ class Product
       return isset($this->_salePrice) && $this->_salePrice > 0;
   }
 
-  private function getPaginatedProducts(?int $categoryId, ?string $searchTerm, ShoppingCart $cart, int $currentPage, int $itemsPerPage): array
+  private function getPaginatedProducts(?int $categoryId, ?string $searchTerm, ?ShoppingCart $cart, int $currentPage, int $itemsPerPage): array
   {
     // $this->_db->connect();
 
