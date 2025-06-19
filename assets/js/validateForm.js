@@ -54,6 +54,10 @@ $(document).ready(function () {
     return (year > currentYear) || (year === currentYear && month > currentMonth + 1);
   }, "Card has expired");
 
+  $.validator.addMethod("noWhitespaceOnly", function(value, element) {
+    return $.trim(value).length > 0;
+  }, "This field cannot be empty or contain only spaces.");
+
 
   $("form.needs-validation").each(function () {
 
@@ -64,12 +68,14 @@ $(document).ready(function () {
         firstName: {
           required: true,
           noSpecialCharsExceptSingleQuote: true,
-          minlength: 2
+          minlength: 2,
+          noWhitespaceOnly: true
         },
         lastName: {
           required: true,
           noSpecialCharsExceptSingleQuote: true,
-          minlength: 2
+          minlength: 2,
+          noWhitespaceOnly: true
         },
         contactNumber: {
           auPhoneNumber: true
@@ -77,10 +83,17 @@ $(document).ready(function () {
         emailAddress: {
           required: true,
           validEmail: true,
-          email: true
+          email: true,
+          noWhitespaceOnly: true
         },
-        streetAddress: "required",
-        suburb: "required",
+        streetAddress: {
+          required: true,
+          noWhitespaceOnly: true
+        },
+        suburb: {
+          required: true,
+          noWhitespaceOnly: true
+        },
         postcode: {
           required: true,
           digits: true,
@@ -93,7 +106,8 @@ $(document).ready(function () {
         cardName: {
           required: true,
           noSpecialCharsExceptSingleQuote: true,
-          minlength: 2
+          minlength: 2,
+          noWhitespaceOnly: true
         },
         cardNumber: {
           required: true,
@@ -110,6 +124,10 @@ $(document).ready(function () {
         cvv: {
           required: true,
           validCardNumber: true
+        },
+        newCategoryName: {
+          required: true,
+          noWhitespaceOnly: true,
         }
       },
       messages: {

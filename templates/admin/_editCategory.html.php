@@ -34,9 +34,21 @@
         <p>
             <input type="submit" name="editCategory" value="Update">
         </p>
+
     </fieldset>
+    
+    </form>
+
+    <p>
+            <form method="post" action="delete-category.php">
+                <input type="hidden" name="categoryId" id="categoryId" value="<?=$categoryID?>">
+                <button type="submit" class="pseudo-icon delete" name="deleteCategory">
+
+                </button>
+
+            </form>
+        </p>
     <?php endif ?>
-</form>
 </div>
 
 

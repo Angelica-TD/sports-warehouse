@@ -14,6 +14,8 @@ if (isset($_POST["deleteCategory"])) {
 
   if($category->deleteCategory($categoryID)){
     $message = "Deleted";
+    header("Location: view-categories.php");
+    exit();
   } else {
     $message = "Something went wrong";
   }

@@ -12,7 +12,7 @@
         </a>
     </li>
     <li>
-        <a href="addCategory.php">
+        <a href="add-category.php">
             Add category
         </a>
     </li>

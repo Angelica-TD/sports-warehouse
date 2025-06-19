@@ -197,7 +197,7 @@ class Category
 
       // Define query, prepare statement, bind parameters
       $sql = <<<SQL
-        INSERT INTO categories (CategoryName)
+        INSERT INTO category (categoryName)
         VALUES (:CategoryName)
       SQL;
       $stmt = $this->_db->prepareStatement($sql);
